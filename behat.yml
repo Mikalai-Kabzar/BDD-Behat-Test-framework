@@ -1,0 +1,35 @@
+default:
+    suites:
+        Wikipedia_features:
+            paths:  
+                - %paths.base%/features/Ticketmaster_features
+            contexts: 
+                - TicketmasterNavigationContext
+                - TicketmasterAccountContext
+    formatters:
+     pretty: ~
+     html:
+      output_path: %paths.base%/build/html/behat
+    extensions:
+        chartinger\Behat\TwigReportExtension\Extension:
+            templates:
+                dir: %paths.base%/twig/
+                file: default.twig
+            output:
+                file: %paths.base%/build/output/index.html
+        jarnaiz\JUnitFormatter\JUnitFormatterExtension:
+            filename: report.xml
+            outputDir: %paths.base%/build/tests
+        emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+          name: html
+          renderer: Twig,Behat2
+          file_name: index
+          print_args: true
+          print_outp: true
+          loop_break: true        
+        Behat\MinkExtension:
+            base_url: 'https://en.wikipedia123.org/'
+            sessions:
+                default:
+                    selenium2:
+                        wd_host: http://localhost:4444/wd/hub                                          
