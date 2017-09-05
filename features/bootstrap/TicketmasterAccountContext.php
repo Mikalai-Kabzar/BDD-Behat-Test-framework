@@ -9,16 +9,15 @@ use Behat\MinkExtension\Context\RawMinkContext;
 
 use TestFramework\Pages\Ticketmaster\MainPage;
 use TestFramework\Pages\Ticketmaster\SignInPage;
-//use TicketmasterPage\signInPageIsDisplayed;
+
+use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
 
 use TestFramework\Services\WebElementsService;
 use TestFramework\Services\AssertService;
 use TestFramework\Services\Services;
-use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
-
 
 /**
- * Defines application features for Ticketmaster for "My account" features.
+ * Defines Ticketmaster account context.
  */
 class TicketmasterAccountContext extends BaseFeatureContext
 {
@@ -83,7 +82,8 @@ class TicketmasterAccountContext extends BaseFeatureContext
     */
     public function myAccountDropdownIsOpened()
     {
-        AssertService::assertEquals(true, $this->isMyAccountDropdownIsOpened());
+        $isDropDownOpened = MainPage::getMyAccountDropDown()->isOptionsVisible();
+        AssertService::assertEquals(true, $isDropDownOpened);
     }
 
     /**
@@ -91,7 +91,8 @@ class TicketmasterAccountContext extends BaseFeatureContext
     */
     public function myAccountDropdownIsNotOpened()
     {
-        AssertService::assertEquals(false, $this->isMyAccountDropdownIsOpened());
+        $isDropDownOpened = MainPage::getMyAccountDropDown()->isOptionsVisible();
+        AssertService::assertEquals(false, $isDropDownOpened);
     }
 
     /**
@@ -112,11 +113,5 @@ class TicketmasterAccountContext extends BaseFeatureContext
         $xpath = SignInPage::WELCOME_MESSAGE_XPATH;
         $actualMessage = WebElementsService::getWebElementText($xpath);
         AssertService::assertEquals(SignInPage::WELCOME_MESSAGE, $actualMessage);
-    }
-
-    private function isMyAccountDropdownIsOpened()
-    {
-        $MyAccountDropDown = MainPage::getMyAccountDropDown();
-        return $MyAccountDropDown->isOptionsVisible();
     }
 }

@@ -12,7 +12,7 @@ use TestFramework\Services\AssertService;
 use TestFramework\Services\Service;
 
 /**
- * Defines application features for Ticketmaster to navigate between tabs.
+ * Defines Ticketmaster navigation context.
  */
 class TicketmasterNavigationContext extends BaseFeatureContext
 {
@@ -42,7 +42,8 @@ class TicketmasterNavigationContext extends BaseFeatureContext
      */
     public function theButtonIsClicked($pageLabel)
     {
-        $isElementExist = WebElementsService::isElementExists(MainPage::getHeaderXpathByLabel($pageLabel).MainPage::TAB_SELECTED_ADDON_XPATH);
+        $xpath = MainPage::getHeaderXpathByLabel($pageLabel).MainPage::TAB_SELECTED_ADDON_XPATH;
+        $isElementExist = WebElementsService::isElementExists($xpath);
         AssertService::assertEquals(true, $isElementExist);
     }
 
@@ -51,7 +52,8 @@ class TicketmasterNavigationContext extends BaseFeatureContext
      */
      public function thePageIsLoaded($pageLabel)
      {
-         $isElementExist = WebElementsService::isElementExists(MainPage::getHeaderXpathByLabel($pageLabel).MainPage::TAB_SELECTED_ADDON_XPATH);
-         AssertService::assertEquals(true, $isElementExist);
+        $xpath = MainPage::getHeaderXpathByLabel($pageLabel).MainPage::TAB_SELECTED_ADDON_XPATH;
+        $isElementExist = WebElementsService::isElementExists($xpath);
+        AssertService::assertEquals(true, $isElementExist);
      }
 }
