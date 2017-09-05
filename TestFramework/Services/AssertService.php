@@ -14,14 +14,26 @@ use PHPUnit_Framework_Assert;
  */
 class AssertService extends Service
 {
+    /**
+    * Assert two values equality.
+    *
+    * @param - $expected - expected value.
+    * @param - $actual - actual value.
+    */
     public static function assertEquals($expected, $actual)
     {
         PHPUnit_Framework_Assert::assertEquals($expected, $actual);
     }
 
-    public static function assertWebElementExists($expected, $Xpath)
+    /**
+    * Assert if webelement exist.
+    *
+    * @param - $expected - expected state of webelement existance.
+    * @param - $xpath - xpath of webelement.
+    */
+    public static function assertWebElementExists($expected, $xpath)
     {
-        PHPUnit_Framework_Assert::assertEquals($expected, WebElementsService::isElementExists($Xpath));
+        PHPUnit_Framework_Assert::assertEquals($expected, WebElementsService::isElementExists($xpath));
     }
     
 }

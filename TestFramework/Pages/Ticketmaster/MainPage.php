@@ -8,7 +8,7 @@ use TestFramework\Services\Service;
 use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
 
 /**
- * Defines application features for Ticketmaster.
+ * Defines Main page.
  */
 class MainPage
 {
@@ -22,10 +22,22 @@ class MainPage
 
     const MY_ACCOUNT_BUTTON_XPATH = ".//*[@id='account-button']";
    
+    /**
+    * Return new MyAccountDropDown instance.
+    *
+    * @return new MyAccountDropDown instance.
+    */
     public static function getMyAccountDropDown(){
         return new MyAccountDropdown();
     }
 
+    /**
+    * Get header xpath by label.
+    *
+    * @param - $label to find xpath.
+    *
+    * @return xpath to find button with $label.
+    */
     public static function getHeaderXpathByLabel($label){
         switch ($label) {
             case 'music':
@@ -43,18 +55,30 @@ class MainPage
         }
     }
     
+    /**
+    * Hover 'Music' navigation button.
+    */
     public static function hoverMusic(){
         WebElementsService::hoverWebElement(MainPage::MUSIC_TAB_XPATH);
     }  
     
+    /**
+    * Hover 'Sport' navigation button.
+    */    
     public static function hoverSport(){
         WebElementsService::hoverWebElement(MainPage::SPORT_TAB_XPATH);
     } 
 
+    /**
+    * Hover 'Arts' navigation button.
+    */
     public static function hoverArts(){
         WebElementsService::hoverWebElement(MainPage::ARTS_TAB_XPATH);
-    }  
-    
+    } 
+
+    /**
+    * Hover 'Family' navigation button.
+    */
     public static function hoverFamily(){
         WebElementsService::hoverWebElement(MainPage::FAMILY_TAB_XPATH);
     }

@@ -10,8 +10,6 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use TestFramework\Pages\Ticketmaster\MainPage;
 use TestFramework\Pages\Ticketmaster\SignInPage;
 
-use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
-
 use TestFramework\Services\WebElementsService;
 use TestFramework\Services\AssertService;
 use TestFramework\Services\Services;
@@ -26,8 +24,7 @@ class TicketmasterAccountContext extends BaseFeatureContext
      */
     public function iHoverOnMyAccountButton()
     {
-        $MyAccountDropDown = MainPage::getMyAccountDropDown();
-        $MyAccountDropDown->hoverButton();
+        MainPage::getMyAccountDropDown()->hoverButton();
     }
 
     /**
@@ -51,11 +48,9 @@ class TicketmasterAccountContext extends BaseFeatureContext
     */
     public function iClickOnOptionOfMyAccountDropdown($option)
     {
-        $MyAccountDropDown = MainPage::getMyAccountDropDown();
-        $MyAccountDropDown->clickOnOption($option);
+        MainPage::getMyAccountDropDown()->clickOnOption($option);
     }
-    
-        
+      
     /**
      * @When I click on option of My Account dropdown
      */
@@ -64,8 +59,7 @@ class TicketmasterAccountContext extends BaseFeatureContext
         //Get cell value of first column and first row
         $row = $table->getRow(0)[0];
         $value = preg_replace("/\"/", '', $row);
-        $MyAccountDropDown = MainPage::getMyAccountDropDown();
-        $MyAccountDropDown->clickOnOption($value);
+        MainPage::getMyAccountDropDown()->clickOnOption($value);
      }
 
     /**
@@ -73,8 +67,7 @@ class TicketmasterAccountContext extends BaseFeatureContext
     */
     public function iClickOnSignInButton()
     {
-        $MyAccountDropDown = MainPage::getMyAccountDropDown();
-        $MyAccountDropDown->clickSignIn();
+        MainPage::getMyAccountDropDown()->clickSignIn();
     }
 
     /**
