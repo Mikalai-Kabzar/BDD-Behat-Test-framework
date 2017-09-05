@@ -20,3 +20,4 @@ $> bin/behat -f junit
 ```
 
 Test result reports in folder ./build.
+----------------
