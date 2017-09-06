@@ -21,6 +21,13 @@ class TicketmasterNavigationContext extends BaseFeatureContext {
     }
 
     /**
+     * @When I click on Create Account button
+     */
+    public function iClickOnCreateAccountButton() {
+        MainPage::clickCreateAccount();
+    }
+
+    /**
      * @When I click on :headerButtonLabel
      */
     public function iClickOnHeaderButtonLabel($headerButtonLabel) {

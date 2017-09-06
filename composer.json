@@ -35,8 +35,7 @@
 
     "autoload-dev": {
         "classmap": [
-            "TestFramework/",
-            "TestFramework/Pages/Ticketmaster"
+            "TestFramework/"
         ]
     },
 

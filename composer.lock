@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee8d40b370f0638caa04777874231744",
+    "hash": "1d50fd16f1c002f37edc9ee745fd76c2",
     "content-hash": "89ed0a82b2da66383e846e54aeabbc26",
     "packages": [
         {
@@ -2608,12 +2608,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "cd9c551affc2fb185ead34038e4ba31f9f3867e1"
+                "reference": "9f8d6a66fba7d0fafcf4f16f340df3a6075f0d66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/cd9c551affc2fb185ead34038e4ba31f9f3867e1",
-                "reference": "cd9c551affc2fb185ead34038e4ba31f9f3867e1",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9f8d6a66fba7d0fafcf4f16f340df3a6075f0d66",
+                "reference": "9f8d6a66fba7d0fafcf4f16f340df3a6075f0d66",
                 "shasum": ""
             },
             "require": {
@@ -2651,7 +2651,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-09-04 03:32:21"
+            "time": "2017-09-05 23:43:07"
         },
         {
             "name": "sybio/gif-creator",

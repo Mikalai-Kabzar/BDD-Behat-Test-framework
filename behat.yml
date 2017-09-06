@@ -3,9 +3,10 @@ default:
         Wikipedia_features:
             paths:  
                 - %paths.base%/features/Ticketmaster_features
-            contexts: 
-                - TicketmasterNavigationContext
+            contexts:
                 - TicketmasterAccountContext
+                - TicketmasterNavigationContext
+                - TicketmasterSignInContext
     formatters:
      pretty: ~
      html:

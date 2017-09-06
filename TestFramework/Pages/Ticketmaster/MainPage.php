@@ -17,6 +17,7 @@ class MainPage {
     const ARTS_TAB_XPATH = ".//*[@id='arts']/a";
     const FAMILY_TAB_XPATH = ".//*[@id='family']/a";
     const MY_ACCOUNT_BUTTON_XPATH = ".//*[@id='account-button']";
+    const CREATE_ACCOUNT_BUTTON_XPATH = ".//*[@id='mytm_link']/a[contains(@href,'create')]";
 
     /**
      * Return new MyAccountDropDown instance.
@@ -79,4 +80,10 @@ class MainPage {
         WebElementsService::hoverWebElement(MainPage::FAMILY_TAB_XPATH);
     }
 
+    /**
+     * Click 'Create Account' button.
+     */
+     public static function clickCreateAccount() {
+        WebElementsService::clickOn(MainPage::CREATE_ACCOUNT_BUTTON_XPATH);
+    }
 }
