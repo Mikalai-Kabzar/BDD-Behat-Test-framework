@@ -73,11 +73,11 @@ class WebElementsService extends Service {
     /**
      * Fill field with value.
      *
-     * @param - $locator of web element.
+     * @param - $xpath of web element.
      * @param - $value string to set.   
      */
-    public static function fillField($locator, $value) {
-        parent::$session->getPage()->fillField($locator, $value);
+    public static function fillField($xpath, $value) {
+        WebElementsService::getWebElement($xpath)->setValue($value);
     }
 
     /**

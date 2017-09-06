@@ -83,7 +83,8 @@ class MainPage {
     /**
      * Click 'Create Account' button.
      */
-     public static function clickCreateAccount() {
+    public static function clickCreateAccount() {
         WebElementsService::clickOn(MainPage::CREATE_ACCOUNT_BUTTON_XPATH);
     }
+
 }

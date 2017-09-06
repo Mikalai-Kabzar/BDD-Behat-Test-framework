@@ -9,8 +9,8 @@ use TestFramework\Services\WebElementsService;
  */
 class SignInToMyAccountPage {
 
-    const EMAIL_FIELD_ID = "email";
-    const PASSWORD_FIELD_ID = "password";
+    const EMAIL_FIELD_XPATH = './/*[@id= "email"]';
+    const PASSWORD_FIELD_XPATH = './/*[@id= "password"]';
     const ACCEPT_AND_CONTINUE_BUTTON_XPATH = './/input[@name="Submit"]';
 
     /**
@@ -26,7 +26,7 @@ class SignInToMyAccountPage {
      * @param $email value to fill email field.
      */
     public static function fillEmail($email) {
-        WebElementsService::fillField(SignInToMyAccountPage::EMAIL_FIELD_ID, $email);
+        WebElementsService::fillField(SignInToMyAccountPage::EMAIL_FIELD_XPATH, $email);
     }
 
     /**
@@ -35,7 +35,7 @@ class SignInToMyAccountPage {
      * @param $password value to fill password field.
      */
     public static function fillPassword($password) {
-        WebElementsService::fillField(SignInToMyAccountPage::PASSWORD_FIELD_ID, $password);
+        WebElementsService::fillField(SignInToMyAccountPage::PASSWORD_FIELD_XPATH, $password);
     }
 
 }
