@@ -3,42 +3,38 @@
 namespace TestFramework\Pages\Ticketmaster;
 
 use TestFramework\Services\WebElementsService;
-use TestFramework\Services\AssertService;
-use TestFramework\Services\Service;
 use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
 
 /**
  * Defines Main page.
  */
-class MainPage
-{
-    const BASE_URL = "http://www.ticketmaster.co.uk/";
-    const TAB_SELECTED_ADDON_XPATH = "[@class='cat-on']"; 
+class MainPage {
 
+    const BASE_URL = "http://www.ticketmaster.co.uk/";
+    const TAB_SELECTED_ADDON_XPATH = "[@class='cat-on']";
     const MUSIC_TAB_XPATH = ".//*[@id='music']/a";
     const SPORT_TAB_XPATH = ".//*[@id='sports']/a";
     const ARTS_TAB_XPATH = ".//*[@id='arts']/a";
     const FAMILY_TAB_XPATH = ".//*[@id='family']/a";
-
     const MY_ACCOUNT_BUTTON_XPATH = ".//*[@id='account-button']";
-   
+
     /**
-    * Return new MyAccountDropDown instance.
-    *
-    * @return new MyAccountDropDown instance.
-    */
-    public static function getMyAccountDropDown(){
+     * Return new MyAccountDropDown instance.
+     *
+     * @return new MyAccountDropDown instance.
+     */
+    public static function getMyAccountDropDown() {
         return new MyAccountDropdown();
     }
 
     /**
-    * Get header xpath by label.
-    *
-    * @param - $label to find xpath.
-    *
-    * @return xpath to find button with $label.
-    */
-    public static function getHeaderXpathByLabel($label){
+     * Get header xpath by label.
+     *
+     * @param - $label to find xpath.
+     *
+     * @return xpath to find button with $label.
+     */
+    public static function getHeaderXpathByLabel($label) {
         switch ($label) {
             case 'music':
                 return MainPage::MUSIC_TAB_XPATH;
@@ -54,32 +50,33 @@ class MainPage
                 break;
         }
     }
-    
+
     /**
-    * Hover 'Music' navigation button.
-    */
-    public static function hoverMusic(){
+     * Hover 'Music' navigation button.
+     */
+    public static function hoverMusic() {
         WebElementsService::hoverWebElement(MainPage::MUSIC_TAB_XPATH);
-    }  
-    
+    }
+
     /**
-    * Hover 'Sport' navigation button.
-    */    
-    public static function hoverSport(){
+     * Hover 'Sport' navigation button.
+     */
+    public static function hoverSport() {
         WebElementsService::hoverWebElement(MainPage::SPORT_TAB_XPATH);
-    } 
+    }
 
     /**
-    * Hover 'Arts' navigation button.
-    */
-    public static function hoverArts(){
+     * Hover 'Arts' navigation button.
+     */
+    public static function hoverArts() {
         WebElementsService::hoverWebElement(MainPage::ARTS_TAB_XPATH);
-    } 
+    }
 
     /**
-    * Hover 'Family' navigation button.
-    */
-    public static function hoverFamily(){
+     * Hover 'Family' navigation button.
+     */
+    public static function hoverFamily() {
         WebElementsService::hoverWebElement(MainPage::FAMILY_TAB_XPATH);
     }
+
 }
