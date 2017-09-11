@@ -1,0 +1,943 @@
+<html>
+<head>
+  <title>Behat Twig Output</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+  <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <style type="text/css">
+   .table-condensed
+   {
+     font-size: 14px;
+     margin-bottom: 0px;
+   }
+   .stepargument
+   {
+     margin-top: 10px;
+     margin-bottom: 10px;
+   }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1 class="page-header">Features</h1>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature1">
+      <span class="badge pull-right">1</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test account features (access to blocks)
+    </div>
+        <div class="panel-collapse collapse" id="feature1">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-1" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-1" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-1">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a new user<br />
+I need to be able to have access to account pages</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-1">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-1">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Hover &quot;My account&quot; button and check this one is opened.
+                <span class="badge pull-right">10</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-1">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I hover music nav-button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then My account dropdown is not opened
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I hover on My account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then My account dropdown is opened
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I hover music nav-button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then My account dropdown is not opened
+                                            </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature2">
+      <span class="badge pull-right">1</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test account creation features with wrong e-mails (first opening of a page)
+    </div>
+        <div class="panel-collapse collapse" id="feature2">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-2" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-2" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-2">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a new user<br />
+I need to get error message caused by using not existed e-mail.</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-2">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-2">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Try to create account error message caused by using not existed e-mail (first opening of a page).
+                <span class="badge pull-right">7</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-2">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on Create Account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I enter &quot;password123456&quot; password to Ticketmaster Password field on Sign In to My Account page
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I enter &quot;atata.email.without@lastPart&quot; to My e-mail address is field.
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then I dont get There are problems with your submission page
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on Accept and Continue
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then I get There are problems with your submission page
+                                            </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature3">
+      <span class="badge pull-right">1</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test account creation features with wrong e-mails (first opening of a page)
+    </div>
+        <div class="panel-collapse collapse" id="feature3">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-3" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-3" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-3">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a new user<br />
+I need to get error message caused by using not existed e-mail.</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-3">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-3">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Try to create account error message caused by using not existed e-mail (first opening of a page).
+                <span class="badge pull-right">6</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-3">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       When I click on Create Account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       And I enter &quot;password123456&quot; password to Ticketmaster Password field on Sign In to My Account page
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       And I enter &lt;email&gt; to My e-mail address is field.
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       When I click on Accept and Continue
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Then I get There are problems with your submission page
+                                            </li>
+                                    </ul>
+                                    <div class="panel panel-default stepargument"><div class="panel-body">
+                    <table class="table table-condensed">
+                      <tr><th>email</th></tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;email&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;@&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;notExists@notExists.notExists&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;@twoAt@atata.com&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;noEnd@email&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;noAt.email&quot;</td>
+                                              </tr>
+                                         </table>
+                   </div></div>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-danger
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature4">
+      <span class="badge pull-right">1</span>
+        <span class="glyphicon
+      glyphicon-remove-circle
+    "></span>
+Test basic navigation of &#039;Ticketmaster&#039; website using tests with failures
+    </div>
+        <div class="panel-collapse collapse" id="feature4">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-4" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-4" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-4">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a auto-tester and user<br />
+I need to be able to navigate using basic nav-buttons using tests with failures</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-4">
+                                    <div class="panel           panel-danger
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-4">
+                  <span class="glyphicon
+      glyphicon-remove-circle
+    "></span>
+
+                <b>Scenario:</b> Click on nav-buttons and wait for tab loading
+                <span class="badge pull-right">3</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-4">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       When I click on &lt;navButton&gt;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Then the &lt;pageLabel&gt; tab is loaded
+                                            </li>
+                                    </ul>
+                                    <div class="panel panel-default stepargument"><div class="panel-body">
+                    <table class="table table-condensed">
+                      <tr><th>navButton</th><th>pageLabel</th></tr>
+                                            <tr class="          danger
+    ">
+                                                  <td>&quot;music&quot;</td>
+                                                  <td>&quot;sport&quot;</td>
+                                              </tr>
+                                            <tr class="          danger
+    ">
+                                                  <td>&quot;sport&quot;</td>
+                                                  <td>&quot;music&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;arts&quot;</td>
+                                                  <td>&quot;arts&quot;</td>
+                                              </tr>
+                                            <tr class="          danger
+    ">
+                                                  <td>&quot;family&quot;</td>
+                                                  <td>&quot;arts&quot;</td>
+                                              </tr>
+                                         </table>
+                   </div></div>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature5">
+      <span class="badge pull-right">2</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test basic navigation of &#039;Ticketmaster&#039; website
+    </div>
+        <div class="panel-collapse collapse" id="feature5">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-5" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-5" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-5">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a auto-tester and user<br />
+I need to be able to navigate using basic nav-buttons</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-5">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-5">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Click on nav-buttons and wait for tab loading
+                <span class="badge pull-right">3</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-5">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       When I click on &lt;navButton&gt;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Then the &lt;pageLabel&gt; tab is loaded
+                                            </li>
+                                    </ul>
+                                    <div class="panel panel-default stepargument"><div class="panel-body">
+                    <table class="table table-condensed">
+                      <tr><th>navButton</th><th>pageLabel</th></tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;music&quot;</td>
+                                                  <td>&quot;music&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;sport&quot;</td>
+                                                  <td>&quot;sport&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;arts&quot;</td>
+                                                  <td>&quot;arts&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;family&quot;</td>
+                                                  <td>&quot;family&quot;</td>
+                                              </tr>
+                                         </table>
+                   </div></div>
+                                  </div>
+              </div>
+            </div>
+                        <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-5">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Click on nav-buttons and wait for nav-button status changing.
+                <span class="badge pull-right">9</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-2-5">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on &quot;music&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then the &quot;music&quot; button is clicked
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on &quot;sport&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then the &quot;sport&quot; button is clicked
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on &quot;arts&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then the &quot;arts&quot; button is clicked
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I click on &quot;family&quot;
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then the &quot;family&quot; button is clicked
+                                            </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature6">
+      <span class="badge pull-right">1</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test clicking on account dropdown menu without login (using table)
+    </div>
+        <div class="panel-collapse collapse" id="feature6">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-6" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-6" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-6">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a new user<br />
+I need to be able to click on &#039;My account&#039; dropdown options and have redirect to &#039;Sigh in&#039; page</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-6">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-6">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Expand &#039;My account&#039; dropdown and click on options to be redirected on Sign in page (using table)
+                <span class="badge pull-right">6</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-6">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I hover on My account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I click on option of My Account dropdown
+                                                                                               <div class="panel panel-default stepargument"><div class="panel-body">
+                        <table class="table table-condensed">
+                                                    <tr>
+                                                          <th>                              &quot;Edit Billing Information&quot;
+                              </th>                                                      </tr>
+                                                 </table>
+                       </div></div>
+                                                                 </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then Sign in page is displayed
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And Sign in page contains correct Welcome message
+                                            </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+  <div class="panel           panel-success
+    ">
+    <div class="panel-heading" data-toggle="collapse" data-target="#feature7">
+      <span class="badge pull-right">2</span>
+        <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+Test clicking on account dropdown menu without login
+    </div>
+        <div class="panel-collapse collapse" id="feature7">
+      <div class="panel-body">
+        <div class="row">
+        <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          <li class="active"><a href="#description-tab-7" role="tab" data-toggle="tab">Description</a></li>                    <li ><a href="#scenario-tab-7" role="tab" data-toggle="tab">Scenarios</a></li>
+        </ul>
+        </div>
+        <div class="col-md-10">
+        <div class="tab-content">
+                    <div class="tab-pane active" id="description-tab-7">
+            <p>In order to test &#039;Ticketmaster&#039; website<br />
+As a new user<br />
+I need to be able to click on &#039;My account&#039; dropdown options and have redirect to &#039;Sigh in&#039; page</p>
+          </div>
+                              <div class="tab-pane " id="scenario-tab-7">
+                                    <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-1-7">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Expand &#039;My account&#039; dropdown and click on options to be redirected on Sign in page
+                <span class="badge pull-right">6</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-1-7">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       When I hover on My account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       And I click on &lt;option&gt; option of My Account dropdown
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       Then Sign in page is displayed
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ban-circle
+    "></span>
+
+                       And Sign in page contains correct Welcome message
+                                            </li>
+                                    </ul>
+                                    <div class="panel panel-default stepargument"><div class="panel-body">
+                    <table class="table table-condensed">
+                      <tr><th>option</th></tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Your Account&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Edit Profile&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Edit Email Preferences&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Edit Billing Information&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Order History&quot;</td>
+                                              </tr>
+                                            <tr class="          success
+    ">
+                                                  <td>&quot;Print My Tickets&quot;</td>
+                                              </tr>
+                                         </table>
+                   </div></div>
+                                  </div>
+              </div>
+            </div>
+                        <div class="panel           panel-success
+    ">
+              <div class="panel-heading" data-toggle="collapse" data-target="#scenario-2-7">
+                  <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                <b>Scenario:</b> Click on &#039;Sign In&#039; button and redirect to Sign In page.
+                <span class="badge pull-right">6</span>
+              </div>
+              <div class="panel-collapse collapse" id="scenario-2-7">
+                <div class="panel-body">
+                  <ul class="list-group">
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Given I am on Ticketmaster
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       When I hover on My account button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I wait &#039;1&#039; seconds
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And I click on Sign In button
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       Then Sign in page is displayed
+                                            </li>
+                                       <li class="list-group-item list-group-item-success">
+                         <span class="glyphicon
+      glyphicon-ok-circle
+    "></span>
+
+                       And Sign in page contains correct Welcome message
+                                            </li>
+                                    </ul>
+                                  </div>
+              </div>
+            </div>
+                                  </div>
+        </div>
+        </div>
+        </div>
+
+        
+      </div>
+    </div>
+      </div>
+<h1 class="page-header">Statistics</h1>
+
+<h3 class="page-header">Scenarios</h3>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: 88.888888888889%">8 passed</div>
+  <div class="progress-bar progress-bar-warning" style="width: 0%">0 pending</div>
+  <div class="progress-bar progress-bar-danger" style="width: 11.111111111111%">1 failed</div>
+  <div class="progress-bar progress-bar-info" style="width: 0%">0 skipped</div>
+</div>
+<h3 class="page-header">Steps</h3>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: 97.761194029851%">131 passed</div>
+  <div class="progress-bar progress-bar-warning" style="width: 0%">0 pending</div>
+  <div class="progress-bar progress-bar-danger" style="width: 2.2388059701493%">3 failed</div>
+  <div class="progress-bar progress-bar-info" style="width: 0%">0 skipped</div>
+</div>
+</div>
+</body>
+</html>
