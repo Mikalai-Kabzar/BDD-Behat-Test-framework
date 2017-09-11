@@ -2,7 +2,6 @@
 
 namespace TestFramework\Services;
 
-use TestFramework\Services\WebElementsService;
 use PHPUnit_Framework_Assert;
 
 /**

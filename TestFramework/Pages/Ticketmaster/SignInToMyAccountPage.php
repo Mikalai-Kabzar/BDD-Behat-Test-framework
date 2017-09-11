@@ -23,7 +23,7 @@ class SignInToMyAccountPage {
     /**
      * Fill 'My e-mail address is' field.
      *
-     * @param $email value to fill email field.
+     * @param $email string to fill email field.
      */
     public static function fillEmail($email) {
         WebElementsService::fillField(SignInToMyAccountPage::EMAIL_FIELD_XPATH, $email);
@@ -32,7 +32,7 @@ class SignInToMyAccountPage {
     /**
      * Fill 'Ticketmaster Password' field.
      *
-     * @param $password value to fill password field.
+     * @param $password string to fill password field.
      */
     public static function fillPassword($password) {
         WebElementsService::fillField(SignInToMyAccountPage::PASSWORD_FIELD_XPATH, $password);

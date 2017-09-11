@@ -7,8 +7,6 @@ namespace TestFramework\Pages\Ticketmaster\Dropdowns;
  */
 class MyAccountDropdown extends Dropdown {
 
-    protected static $keyWord = "account";
-
     const ACCOUNT_BUTTON_XPATH = ".//div[@id='account-options']";
     const SIGN_IN_BUTTON_XPATH = ".//a[@class='button' and text()='Sign In']";
     const YOUR_ACCOUNT_LABEL = "Your Account";
@@ -18,6 +16,9 @@ class MyAccountDropdown extends Dropdown {
     const ORDER_HISTORY_LABEL = "Order History";
     const PRINT_MY_TICKETS_LABEL = "Print My Tickets";
 
+    protected static $keyWord = "account";
+    
+    
     /**
      * Click on $option option.
      *
@@ -50,7 +51,6 @@ class MyAccountDropdown extends Dropdown {
     public function clickOnEditProfileLabel() {
         $xpath = $this->getOptionXpath(MyAccountDropdown::EDIT_PROFILE_LABEL);
         $this->clickOnMenuElement($xpath);
-        ;
     }
 
     /**

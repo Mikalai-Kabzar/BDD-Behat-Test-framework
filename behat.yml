@@ -1,8 +1,9 @@
 default:
     suites:
-        Wikipedia_features:
+        Features:
             paths:  
                 - %paths.base%/features/Ticketmaster_features
+                #/ticketmaster-navigation-failures.feature
             contexts:
                 - TicketmasterAccountContext
                 - TicketmasterNavigationContext
@@ -29,8 +30,8 @@ default:
           print_outp: true
           loop_break: true        
         Behat\MinkExtension:
-            base_url: 'https://en.wikipedia123.org/'
-            sessions:
-                default:
-                    selenium2:
-                        wd_host: http://localhost:4444/wd/hub                                          
+            selenium2:
+                # chrome
+                wd_host: "http://127.0.0.1:4444/wd/hub"
+            # chrome
+            browser_name: chrome                                                                                        

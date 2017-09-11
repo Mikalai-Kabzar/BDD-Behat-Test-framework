@@ -9,6 +9,11 @@ use TestFramework\Services\WebElementsService;
  */
 abstract class Dropdown {
 
+    const BUTTON_XPATH = ".//button[@id='%s-button']";
+    const OPTION_XPATH = Dropdown::OPTIONS_LIST_XPATH."/li/a[text()='%s']";
+    const OPTIONS_XPATH = ".//div[@id='%s-options']";
+    const OPTIONS_LIST_XPATH = ".//ul[@id='%s-list-options']";
+    
     protected static $keyWord = "keyWord";
 
     /**
@@ -41,37 +46,37 @@ abstract class Dropdown {
      *
      * @param $label - label of option.
      *
-     * @return xpath of $label option.
+     * @return string with xpath of $label option.
      */
     protected function getOptionXpath($label) {
-        return $this->getOptionsListXpath() . "/li/a[text()='" . $label . "']";
+        return sprintf(Dropdown::OPTION_XPATH,$this::$keyWord,$label);
     }
 
     /**
      * Return xpath of dropdown button.
      *
-     * @return xpath of dropdown button.
+     * @return string with xpath of dropdown button.
      */
     private function getButtonXpath() {
-        return ".//button[@id='" . $this::$keyWord . "-button']";
+        return sprintf(Dropdown::BUTTON_XPATH,$this::$keyWord);
     }
 
     /**
      * Return xpath of options.
      *
-     * @return xpath of options.
+     * @return string with xpath of options.
      */
     private function getOptionsXpath() {
-        return ".//div[@id='" . $this::$keyWord . "-options']";
+        return sprintf(Dropdown::OPTIONS_XPATH,$this::$keyWord);
     }
 
     /**
      * Return xpath of options list.
      *
-     * @return xpath of options list.   
+     * @return string with xpath of options list.   
      */
     private function getOptionsListXpath() {
-        return ".//ul[@id='" . $this::$keyWord . "-list-options']";
+        return sprintf(Dropdown::OPTIONS_LIST_XPATH,$this::$keyWord);
     }
 
 }

@@ -3,8 +3,8 @@
 use Behat\Gherkin\Node\TableNode;
 use TestFramework\Pages\Ticketmaster\MainPage;
 use TestFramework\Pages\Ticketmaster\SignInPage;
-use TestFramework\Services\WebElementsService;
 use TestFramework\Services\AssertService;
+use TestFramework\Services\WebElementsService;
 
 /**
  * Defines Ticketmaster account context.

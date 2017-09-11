@@ -22,7 +22,7 @@ class MainPage {
     /**
      * Return new MyAccountDropDown instance.
      *
-     * @return new MyAccountDropDown instance.
+     * @return MyAccountDropDown instance.
      */
     public static function getMyAccountDropDown() {
         return new MyAccountDropdown();
@@ -33,7 +33,7 @@ class MainPage {
      *
      * @param - $label to find xpath.
      *
-     * @return xpath to find button with $label.
+     * @return string with xpath to find button with $label.
      */
     public static function getHeaderXpathByLabel($label) {
         switch ($label) {

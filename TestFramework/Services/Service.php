@@ -2,11 +2,16 @@
 
 namespace TestFramework\Services;
 
+use Behat\Mink\Session;
+
 /**
  * Abstract service.
  */
 class Service {
-
+    
+    /**
+     * @var Session
+     */
     protected static $session;
 
     const actionTimeout = 500;

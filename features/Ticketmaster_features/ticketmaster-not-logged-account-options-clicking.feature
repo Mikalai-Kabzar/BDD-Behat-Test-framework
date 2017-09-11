@@ -1,9 +1,9 @@
-Feature:Test clicking on account dropdown menu without login
+Feature: Test clicking on account dropdown menu without login
 In order to test 'Ticketmaster' website
 As a new user
 I need to be able to click on 'My account' dropdown options and have redirect to 'Sigh in' page
 
-  Scenario Outline:Expand 'My account' dropdown and click on options to be redirected on Sign in page
+  Scenario Outline: Expand 'My account' dropdown and click on options to be redirected on Sign in page
     Given I am on Ticketmaster
     When I hover on My account button
     And I wait '1' seconds
@@ -20,7 +20,7 @@ I need to be able to click on 'My account' dropdown options and have redirect to
       | "Order History"            |
       | "Print My Tickets"         |
 
-  Scenario:Click on 'Sign In' button and redirect to Sign In page.
+  Scenario: Click on 'Sign In' button and redirect to Sign In page.
     Given I am on Ticketmaster
     When I hover on My account button
     And I wait '1' seconds
