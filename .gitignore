@@ -6,3 +6,6 @@ build/
 nbproject/
 
 features/Ticketmaster_features-reserve/
+.settings/org.eclipse.wst.validation.prefs
+.project
+.buildpath
