@@ -19,5 +19,5 @@ To get junit .xml report run
 $> bin/behat -f junit
 ```
 
-Test result reports in folder ./build.
+Test result reports in folder ./build
 ----------------
