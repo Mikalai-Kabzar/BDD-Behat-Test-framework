@@ -1,8 +1,11 @@
 default:
     suites:
-        Features:
-            paths:  
-                - %paths.base%/features/Ticketmaster_features/ShortTest.feature
+        My_suite_features:
+            paths:
+            
+              - %paths.base%/features/Ticketmaster_features/ShortTest.feature
+              - %paths.base%/features/Ticketmaster_features/ShortTest1.feature  
+
                 #/ticketmaster-navigation-failures.feature
             contexts:
                 - ShortContext
