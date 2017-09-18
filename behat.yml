@@ -2,9 +2,10 @@ default:
     suites:
         Features:
             paths:  
-                - %paths.base%/features/Ticketmaster_features
+                - %paths.base%/features/Ticketmaster_features/ShortTest.feature
                 #/ticketmaster-navigation-failures.feature
             contexts:
+                - ShortContext
                 - TicketmasterAccountContext
                 - TicketmasterNavigationContext
                 - TicketmasterSignInContext
