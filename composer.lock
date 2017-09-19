@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "11fd6a26f8d95cc5062ccdb615fb4bb4",
+    "content-hash": "0177fcdfb35eec6ad2cca258feedc297",
     "packages": [
         {
             "name": "behat/behat",
@@ -4464,6 +4464,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "behat/behat": 0,
         "peridot-php/webdriver-manager": 20,
         "chartinger/behat-twig-report-extension": 20
     },
