@@ -1,21 +1,25 @@
 <?php
-use PhpSpec\Event\SuiteEvent;
 use TestFramework\Services\AssertService;
 use TestFramework\Services\ReportPortalHTTPService;
-use Behat\Behat\Context\Context;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
+use Behat\Testwork\Tester\Result\TestResults;
 
+use Behat\Behat\Hook\Scope\AfterFeatureScope;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeFeatureScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Testwork\Hook\Call\BeforeSuite;
+use Behat\Behat\Hook\Scope\BeforeStepScope;
+
 /**
  * Defines Short context.
  */
 class ShortContext extends BaseFeatureContext
 {
 
+    //private static $arrayWithSteps = array();
+    private static $arrayWithSteps = array();
     /**
      *
      * @var ReportPortalHTTPService
@@ -23,44 +27,12 @@ class ShortContext extends BaseFeatureContext
     protected static $httpService;
 
     public $result = 0;
-
-    // /**
-    // *
-    // * @var ReportPortalHTTPService
-    // */
-    // public $httpService;
     
     /**
      * @Given I want to calculate some value
      */
     public function iWantToCalculateSomeValue()
     {
-        // $this->httpService = new ReportPortalHTTPService();
-        
-        // $res = $this->httpService->login();
-        
-        // echo $client->
-        // echo $res->getStatusCode();
-        // "200"
-        // echo $res->getHeader('content-type')[0];
-        // 'application/json; charset=utf8'
-        
-        // echo $res->getBody();
-        
-        // echo '\n';
-        // echo '\n';
-        // echo $this->httpService->getValueFromJSON('email', $res);
-        // $res = $this->httpService->launchTestRun();
-        // $res = $this->httpService->finishTestRun();
-        // finishTestRun()
-        
-        // echo $this->httpService->getValueFromJSON('id', $res);
-        
-        // public function request($method, $uri = '', array $options = [])
-        // {
-        // $options[RequestOptions::SYNCHRONOUS] = true;
-        // return $this->requestAsync($method, $uri, $options)->wait();
-        // }
     }
 
     /**
@@ -78,7 +50,7 @@ class ShortContext extends BaseFeatureContext
     {
         AssertService::assertEquals($value1, $this->result);
     }
-
+ 
     /**
      * @BeforeSuite
      */
@@ -86,27 +58,124 @@ class ShortContext extends BaseFeatureContext
     {
         $suiteName = $event->getSuite()->getName();
         ShortContext::$httpService = new ReportPortalHTTPService();
-        ShortContext::$httpService->launchTestRun($suiteName);
+        ShortContext::$httpService->launchTestRun('Test Run - '.$suiteName);
         ShortContext::$httpService->createRootItem($suiteName);
     }
     
+    /**
+     * @BeforeFeature
+     */
+    public static function startFeature(BeforeFeatureScope $event)
+    {
+        $featureName = $event->getFeature()->getTitle();
+        ShortContext::$httpService->createFeatureItem($featureName);
+    }
     
+    /**
+     * @BeforeScenario
+     */
+    public static function startScenario(BeforeScenarioScope $event)
+    {
+        ShortContext::$arrayWithSteps = array();
+        $scenarioName = $event->getScenario()->getTitle();
+        ShortContext::$httpService->createScenarioItem($scenarioName);
+    }
     
+    /**
+     * @BeforeStep
+     */
+    public static function startStep(BeforeStepScope $event)
+    {
+        $keyWord = $event->getStep()->getKeyword();
+        $stepName = $event->getStep()->getText();
+        ShortContext::$httpService->createStepItem($keyWord.' : '.$stepName);
+    }
 
+    /**
+     * @AfterStep
+     */
+    public static function finishStep(AfterStepScope $event)
+    {
+        array_push(ShortContext::$arrayWithSteps, $event->getStep());
+        //ShortContext::$arrayWithSteps = array();
+        $statusCode = $event->getTestResult()->getResultCode();
+        ShortContext::$httpService->finishStepItem($statusCode,AssertService::getAssertMessage());
+    }
+    
+    /**
+     * @AfterScenario
+     */
+    public static function finishScenario(AfterScenarioScope $event)
+    {
+        $fullArrayWithStep =  $event->getScenario()->getSteps();
+        //$fullArrayWithText =  array();
+        //$diffArray = array_diff($fullArrayWithStep, ShortContext::$arrayWithSteps );
+        
+        
+        
+        $diffArray = array_udiff($fullArrayWithStep, ShortContext::$arrayWithSteps,
+            function ($obj_a, $obj_b) {
+                return strcmp($obj_a->getText(), $obj_b->getText());
+            }
+            );
+        
+        
+        
+        
+//         //array_push($fullArrayWithText, $event->getStep()->getText());
+//         foreach ($fullArrayWithStep as $step) {
+//             array_push($fullArrayWithText, $step->getText());
+//         }
+        
+        
+//         //ShortContext::$arrayWithSteps = $array;
+//         //ShortContext::$arrayWithSteps = array();
+//         foreach (ShortContext::$arrayWithSteps as $value) {
+//             print '____________________'.$value;
+//         }
+//         print '______!!!!!!!!!!!!!!!!!!!!!!!!!!!______';
+//         foreach ($fullArrayWithText as $value) {
+//             print '____________________'.$value;
+//         }
+        
+        
+        
+        print '______!!!!!!!!!!!!!!_______=============================______________!!!!!!!!!!!!!______';
+        foreach ($diffArray as $value) {
+            print '__________--__________'.$value->getText();
+            
+            $keyWord = $value->getKeyword();
+            $stepName = $value->getText();
+            ShortContext::$httpService->createStepItem($keyWord.' : '.$stepName);
+            
+            ShortContext::$httpService->finishStepItem(TestResults::SKIPPED,'SKIPPED');
+            
+            
+        }
+        
+        
+        
+        
+        $statusCode = $event->getTestResult()->getResultCode(); 
+        ShortContext::$httpService->finishScrenarioItem($statusCode);
+    }
+    
+    /**
+     * @AfterFeature
+     */
+    public static function finishFeature(AfterFeatureScope $event)
+    {
+        $statusCode = $event->getTestResult()->getResultCode(); 
+        ShortContext::$httpService->finishFeatureItem($statusCode);
+    }
+    
     /**
      * @AfterSuite
      */
-    public static function finishLaunch(BeforeSuiteScope $event)
+    public static function finishLaunch(AfterSuiteScope $event)
     {
-        $statusCode = $event->getTestResult()->isPassed();
-        
-        ShortContext::$httpService->finishRootItem();
-        
-        if($statusCode) {
-            $status = 'PASSED';
-        } else {
-            $status = 'FAILED';
-        }
-        ShortContext::$httpService->finishTestRun($status);
+        $statusCode = $event->getTestResult()->getResultCode(); 
+        ShortContext::$httpService->finishRootItem($statusCode);
+        ShortContext::$httpService->finishTestRun($statusCode);
     }
 }

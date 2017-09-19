@@ -7,5 +7,11 @@ I need to be able to navigate using basic nav-buttons
     Given I want to calculate some value
     When I calculate 5 and 1
     Then I get 6
-	Then I get 3
-	Then I get 6
+	And I get 6
+	And I get 6
+	And I get 5
+	And I get 2
+	And I get 3
+		
+
+	
