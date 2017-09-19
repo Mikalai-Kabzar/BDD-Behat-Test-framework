@@ -11,13 +11,15 @@ class ReportPortalHTTPService
 
     private const formatDate = 'Y-m-d\TH:i:s';
 
-    private static $UUID = 'fb0b93bb-0d0b-4b99-84be-9be85cc9dcb2';
+    private static $UUID = '07fa681f-31ea-438d-8711-628c14020c5e';
 
     private static $baseURI = 'http://localhost:8080/api/';
 
     private static $projectName = 'default_personal';
 
     private static $launchID;
+
+    private static $rootItemID;
 
     /**
      *
@@ -56,7 +58,6 @@ class ReportPortalHTTPService
 
     public static function finishTestRun($status)
     {
-        $status = 'PASSED';
         $result = ReportPortalHTTPService::$client->put('v1/' . ReportPortalHTTPService::$projectName . '/launch/' . ReportPortalHTTPService::$launchID . '/finish', array(
             'headers' => array(
                 'Content-Type' => 'application/json',
@@ -71,6 +72,51 @@ class ReportPortalHTTPService
         return $result;
     }
 
+    
+    public static function createRootItem($name)
+    {
+        print ReportPortalHTTPService::$launchID;
+        $result = ReportPortalHTTPService::$client->post('v1/' . ReportPortalHTTPService::$projectName . '/item', array(
+            'headers' => array(
+                'Content-Type' => 'application/json',
+                'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
+            ),      
+            'json' => array(
+                'description' => "Suite description",
+                'launch_id' => ReportPortalHTTPService::$launchID,
+                'name' => $name,
+                'start_time' => date(ReportPortalHTTPService::formatDate),
+                "tags"=> array(
+                    "@Tag of root item"
+                ),
+                "type"=> "SUITE",
+                "uniqueId"=> "string"
+            )
+        ));
+        ReportPortalHTTPService::$rootItemID = ReportPortalHTTPService::getValueFromJSON('id', $result);
+        return $result;
+    }
+    
+    //http://localhost:8080/api/v1/${#TestCase#projectName}/item/${#TestCase#RootTestID}
+    
+    public static function finishRootItem()
+    {
+        $result = ReportPortalHTTPService::$client->put('v1/' . ReportPortalHTTPService::$projectName . '/item/'.ReportPortalHTTPService::$rootItemID, array(
+            'headers' => array(
+                'Content-Type' => 'application/json',
+                'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
+            ),
+            'json' => array(
+                'end_time' => date(ReportPortalHTTPService::formatDate),
+                'status'=> 'PASSED'
+            )
+        ));
+
+        
+        ReportPortalHTTPService::$rootItemID = '';
+        return $result;
+    }
+    
     public static function getValueFromJSON($request, ResponseInterface $response)
     {
         $array = json_decode($response->getBody()->getContents());

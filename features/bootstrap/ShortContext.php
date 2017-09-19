@@ -1,4 +1,5 @@
 <?php
+use PhpSpec\Event\SuiteEvent;
 use TestFramework\Services\AssertService;
 use TestFramework\Services\ReportPortalHTTPService;
 use Behat\Behat\Context\Context;
@@ -86,14 +87,21 @@ class ShortContext extends BaseFeatureContext
         $suiteName = $event->getSuite()->getName();
         ShortContext::$httpService = new ReportPortalHTTPService();
         ShortContext::$httpService->launchTestRun($suiteName);
+        ShortContext::$httpService->createRootItem($suiteName);
     }
+    
+    
+    
 
     /**
      * @AfterSuite
      */
-    public static function finishLaunch(AfterSuiteScope $event)
+    public static function finishLaunch(BeforeSuiteScope $event)
     {
         $statusCode = $event->getTestResult()->isPassed();
+        
+        ShortContext::$httpService->finishRootItem();
+        
         if($statusCode) {
             $status = 'PASSED';
         } else {
