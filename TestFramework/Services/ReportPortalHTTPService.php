@@ -10,15 +10,15 @@ use Behat\Testwork\Tester\Result\TestResults;
 class ReportPortalHTTPService
 {
 
-    private const FEATURE_DESCRIPTION = 'Feature description';
+    private const DEFAULT_FEATURE_DESCRIPTION = '';
 
-    private const SCENARIO_DESCRIPTION = 'Scenario description';
+    private const DEFAULT_SCENARIO_DESCRIPTION = '';
 
-    private const STEP_DESCRIPTION = 'Step description';
+    private const DEFAULT_STEP_DESCRIPTION = '';
 
-    private const formatDate = 'Y-m-d\TH:i:s';
+    private const FORMAT_DATE = 'Y-m-d\TH:i:s';
 
-    private static $UUID = '07fa681f-31ea-438d-8711-628c14020c5e';
+    private static $UUID = '07dd1f6d-d2d5-474f-90f8-fc14a59b49ad';
 
     private static $baseURI = 'http://localhost:8080/api/';
 
@@ -47,7 +47,7 @@ class ReportPortalHTTPService
         ]);
     }
 
-    public static function launchTestRun($name)
+    public static function launchTestRun($name, $description, $mode, array $tags)
     {
         $result = ReportPortalHTTPService::$client->post('v1/' . ReportPortalHTTPService::$projectName . '/launch', array(
             'headers' => array(
@@ -55,14 +55,11 @@ class ReportPortalHTTPService
                 'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
             ),
             'json' => array(
-                'description' => "Test run, Creation of client for behat",
-                'mode' => "DEFAULT",
+                'description' => $description,
+                'mode' => $mode,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::formatDate),
-                'tags' => array(
-                    "@TestRun",
-                    "@Second tag"
-                )
+                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'tags' => $tags
             )
         ));
         ReportPortalHTTPService::$launchID = ReportPortalHTTPService::getValueFromJSON('id', $result);
@@ -71,11 +68,6 @@ class ReportPortalHTTPService
 
     public static function finishTestRun($statusCode)
     {
-//         if ($statusCode) {
-//             $status = 'PASSED';
-//         } else {
-//             $status = 'FAILED';
-//         }
         $status = ReportPortalHTTPService::calculateStatus($statusCode);
         $result = ReportPortalHTTPService::$client->put('v1/' . ReportPortalHTTPService::$projectName . '/launch/' . ReportPortalHTTPService::$launchID . '/finish', array(
             'headers' => array(
@@ -83,7 +75,7 @@ class ReportPortalHTTPService
                 'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
             ),
             'json' => array(
-                'end_time' => date(ReportPortalHTTPService::formatDate),
+                'end_time' => date(ReportPortalHTTPService::FORMAT_DATE),
                 'status' => $status
             )
         ));
@@ -91,7 +83,7 @@ class ReportPortalHTTPService
         return $result;
     }
 
-    public static function createRootItem($name)
+    public static function createRootItem($name, $description, array $tags)
     {
         $result = ReportPortalHTTPService::$client->post('v1/' . ReportPortalHTTPService::$projectName . '/item', array(
             'headers' => array(
@@ -99,13 +91,11 @@ class ReportPortalHTTPService
                 'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
             ),
             'json' => array(
-                'description' => "Test run description",
+                'description' => $description,
                 'launch_id' => ReportPortalHTTPService::$launchID,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::formatDate),
-                "tags" => array(
-                    "@Tag of root item"
-                ),
+                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                "tags" => $tags,
                 "type" => "SUITE",
                 "uniqueId" => "string"
             )
@@ -116,50 +106,77 @@ class ReportPortalHTTPService
 
     public static function finishRootItem($statusCode)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$rootItemID, TestResults::PASSED, "Test run description");
+        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$rootItemID, TestResults::PASSED, '');
         ReportPortalHTTPService::$rootItemID = '';
         return $result;
     }
 
     public static function createFeatureItem($name)
     {
-        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$rootItemID, ReportPortalHTTPService::FEATURE_DESCRIPTION, $name, 'SUITE');
+        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$rootItemID, ReportPortalHTTPService::DEFAULT_FEATURE_DESCRIPTION, $name, 'SUITE', array());
         ReportPortalHTTPService::$featureItemID = ReportPortalHTTPService::getValueFromJSON('id', $result);
         return $result;
     }
 
-    public static function createScenarioItem($name)
+    public static function createScenarioItem($name, $description)
     {
-        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$featureItemID, ReportPortalHTTPService::SCENARIO_DESCRIPTION, $name, 'TEST');
+        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$featureItemID, $description, $name, 'TEST', array());
         ReportPortalHTTPService::$scenarioItemID = ReportPortalHTTPService::getValueFromJSON('id', $result);
         return $result;
     }
 
     public static function createStepItem($name)
     {
-        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$scenarioItemID, ReportPortalHTTPService::STEP_DESCRIPTION, $name, 'STEP');
+        $result = ReportPortalHTTPService::createChildItem(ReportPortalHTTPService::$scenarioItemID, ReportPortalHTTPService::DEFAULT_STEP_DESCRIPTION, $name, 'STEP', array());
         ReportPortalHTTPService::$stepItemID = ReportPortalHTTPService::getValueFromJSON('id', $result);
         return $result;
     }
 
-    public static function finishStepItem($statusCode, $trace)
+    public static function finishStepItem($statusCode, $description, $stackTrace)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$stepItemID, $statusCode, 'Description : ' . $statusCode . '. Stack trace: ' . $trace);
+        $actualDescription = '';      
+        if ($statusCode == TestResults::SKIPPED) {
+            ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $description, 'info');
+            $actualDescription = $description;
+        } 
+        if ($statusCode == TestResults::FAILED) {
+            ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $stackTrace, 'error');
+            $actualDescription = $description;
+        } 
+            
+        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$stepItemID, $statusCode, $actualDescription);
         ReportPortalHTTPService::$stepItemID = '';
         return $result;
     }
 
     public static function finishScrenarioItem($statusCode)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$scenarioItemID, $statusCode, 'Description : ' . $statusCode);
+        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$scenarioItemID, $statusCode, '');
         ReportPortalHTTPService::$scenarioItemID = '';
         return $result;
     }
 
-    public static function finishFeatureItem($statusCode)
+    public static function finishFeatureItem($statusCode, $description)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$featureItemID, $statusCode, 'Description : ' . $statusCode);
+        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$featureItemID, $statusCode, $description);
         ReportPortalHTTPService::$featureItemID = '';
+        return $result;
+    }
+
+    private static function addLogMessage($item_id, $message, $logLevel)
+    {
+        $result = ReportPortalHTTPService::$client->post('v1/' . ReportPortalHTTPService::$projectName . '/log', array(
+            'headers' => array(
+                'Content-Type' => 'application/json',
+                'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
+            ),
+            'json' => array(
+                'item_id' => $item_id,
+                'message' => $message,
+                'time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'level' => $logLevel
+            )
+        ));
         return $result;
     }
 
@@ -169,7 +186,7 @@ class ReportPortalHTTPService
         return $array->{$request};
     }
 
-    private static function createChildItem($rootItemID, $description, $name, $type)
+    private static function createChildItem($rootItemID, $description, $name, $type, array $tags)
     {
         $result = ReportPortalHTTPService::$client->post('v1/' . ReportPortalHTTPService::$projectName . '/item/' . $rootItemID, array(
             'headers' => array(
@@ -180,10 +197,8 @@ class ReportPortalHTTPService
                 'description' => $description,
                 'launch_id' => ReportPortalHTTPService::$launchID,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::formatDate),
-                'tags' => array(
-                    '@Tag of feature item'
-                ),
+                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'tags' => $tags,
                 'type' => $type,
                 'uniqueId' => 'string'
             )
@@ -193,17 +208,7 @@ class ReportPortalHTTPService
 
     private static function finishItem($itemID, $statusCode, $description)
     {
-//         if ($statusCode == TestResults::PASSED) {
-//             $status = 'PASSED';
-//         } elseif ($statusCode == TestResults::FAILED) {
-//             $status = 'FAILED';
-//         } elseif ($statusCode == TestResults::SKIPPED) {
-//             $status = 'SKIPPED';
-//         } else {
-//             print $statusCode;
-//         }
         $status = ReportPortalHTTPService::calculateStatus($statusCode);
- 
         $result = ReportPortalHTTPService::$client->put('v1/' . ReportPortalHTTPService::$projectName . '/item/' . $itemID, array(
             'headers' => array(
                 'Content-Type' => 'application/json',
@@ -211,13 +216,13 @@ class ReportPortalHTTPService
             ),
             'json' => array(
                 'description' => $description,
-                'end_time' => date(ReportPortalHTTPService::formatDate),
+                'end_time' => date(ReportPortalHTTPService::FORMAT_DATE),
                 'status' => $status
             )
         ));
         return $result;
     }
-    
+
     private static function calculateStatus($statusCode)
     {
         if ($statusCode == TestResults::PASSED) {
@@ -229,5 +234,4 @@ class ReportPortalHTTPService
         }
         return $status;
     }
-    
 }

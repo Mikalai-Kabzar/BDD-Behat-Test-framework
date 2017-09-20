@@ -1,16 +1,16 @@
 <?php
-use TestFramework\Services\AssertService;
-use TestFramework\Services\ReportPortalHTTPService;
-use Behat\Testwork\Hook\Scope\AfterSuiteScope;
-use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
-use Behat\Testwork\Tester\Result\TestResults;
-
 use Behat\Behat\Hook\Scope\AfterFeatureScope;
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeFeatureScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeStepScope;
+use Behat\Behat\Hook\Scope\ScenarioScope;
+use Behat\Behat\Output\Printer\ConsoleOutputPrinter;
+use Behat\Testwork\Hook\Scope\AfterSuiteScope;
+use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
+use Behat\Testwork\Tester\Result\TestResults;
+use TestFramework\Services\AssertService;
+use TestFramework\Services\ReportPortalHTTPService;
 
 /**
  * Defines Short context.
@@ -18,8 +18,16 @@ use Behat\Behat\Hook\Scope\BeforeStepScope;
 class ShortContext extends BaseFeatureContext
 {
 
-    //private static $arrayWithSteps = array();
+    private const SCENARIO_OUTLINE_KEYWORD = 'Example';
+
     private static $arrayWithSteps = array();
+
+    private static $arrayWithScenarios = array();
+
+    private static $arrayWithFeatures = array();
+
+    private const launchMode = 'DEFAULT';
+
     /**
      *
      * @var ReportPortalHTTPService
@@ -27,13 +35,12 @@ class ShortContext extends BaseFeatureContext
     protected static $httpService;
 
     public $result = 0;
-    
+
     /**
      * @Given I want to calculate some value
      */
     public function iWantToCalculateSomeValue()
-    {
-    }
+    {}
 
     /**
      * @When I calculate :value1 and :value2
@@ -50,7 +57,7 @@ class ShortContext extends BaseFeatureContext
     {
         AssertService::assertEquals($value1, $this->result);
     }
- 
+
     /**
      * @BeforeSuite
      */
@@ -58,29 +65,49 @@ class ShortContext extends BaseFeatureContext
     {
         $suiteName = $event->getSuite()->getName();
         ShortContext::$httpService = new ReportPortalHTTPService();
-        ShortContext::$httpService->launchTestRun('Test Run - '.$suiteName);
-        ShortContext::$httpService->createRootItem($suiteName);
+        ShortContext::$httpService->launchTestRun('Test Run - ' . $suiteName, '', ShortContext::launchMode, array());
+        ShortContext::$httpService->createRootItem($suiteName, '', array());
     }
-    
+
     /**
      * @BeforeFeature
      */
     public static function startFeature(BeforeFeatureScope $event)
     {
         $featureName = $event->getFeature()->getTitle();
-        ShortContext::$httpService->createFeatureItem($featureName);
+        $keyWord = $event->getFeature()->getKeyword();
+        ShortContext::$httpService->createFeatureItem($keyWord . ' : ' . $featureName, '');
     }
-    
+
     /**
      * @BeforeScenario
      */
     public static function startScenario(BeforeScenarioScope $event)
     {
         ShortContext::$arrayWithSteps = array();
-        $scenarioName = $event->getScenario()->getTitle();
-        ShortContext::$httpService->createScenarioItem($scenarioName);
+        $keyWord = $event->getScenario()->getKeyword();
+        $scenarioTitle = $event->getScenario()->getTitle();
+        $description = '';
+        if (ShortContext::SCENARIO_OUTLINE_KEYWORD == $keyWord) {
+            $scenarios = $event->getFeature()->getScenarios();
+            $scenarioLine = 0;
+            $scenarioIndex = 0;
+            for ($i = 0; $i < sizeof($scenarios); $i ++) {
+                if ($event->getScenario()->getLine() >= $scenarios[$i]->getLine()) {
+                    $scenarioLine = $scenarios[$i]->getLine();
+                    $scenarioIndex = $i;
+                }
+            }
+            $scenario = $event->getFeature()->getScenarios()[$scenarioIndex];
+            $scenarioName = $scenario->getKeyword() . ' : ' . $scenario->getTitle();
+            $description = $keyWord . ' : ' . $scenarioTitle;
+        } else {
+            $scenarioName = $keyWord . ' : ' . $scenarioTitle;
+            $description = '';
+        }
+        ShortContext::$httpService->createScenarioItem($scenarioName, $description);
     }
-    
+
     /**
      * @BeforeStep
      */
@@ -88,7 +115,7 @@ class ShortContext extends BaseFeatureContext
     {
         $keyWord = $event->getStep()->getKeyword();
         $stepName = $event->getStep()->getText();
-        ShortContext::$httpService->createStepItem($keyWord.' : '.$stepName);
+        ShortContext::$httpService->createStepItem($keyWord . ' : ' . $stepName);
     }
 
     /**
@@ -97,84 +124,49 @@ class ShortContext extends BaseFeatureContext
     public static function finishStep(AfterStepScope $event)
     {
         array_push(ShortContext::$arrayWithSteps, $event->getStep());
-        //ShortContext::$arrayWithSteps = array();
         $statusCode = $event->getTestResult()->getResultCode();
-        ShortContext::$httpService->finishStepItem($statusCode,AssertService::getAssertMessage());
+        ShortContext::$httpService->finishStepItem($statusCode, AssertService::getAssertMessage(), AssertService::getStackTraceMessage());
     }
-    
+
     /**
      * @AfterScenario
      */
-    public static function finishScenario(AfterScenarioScope $event)
+    public static function finishScenario(ScenarioScope $event)
     {
-        $fullArrayWithStep =  $event->getScenario()->getSteps();
-        //$fullArrayWithText =  array();
-        //$diffArray = array_diff($fullArrayWithStep, ShortContext::$arrayWithSteps );
-        
-        
-        
-        $diffArray = array_udiff($fullArrayWithStep, ShortContext::$arrayWithSteps,
-            function ($obj_a, $obj_b) {
-                return strcmp($obj_a->getText(), $obj_b->getText());
-            }
-            );
-        
-        
-        
-        
-//         //array_push($fullArrayWithText, $event->getStep()->getText());
-//         foreach ($fullArrayWithStep as $step) {
-//             array_push($fullArrayWithText, $step->getText());
-//         }
-        
-        
-//         //ShortContext::$arrayWithSteps = $array;
-//         //ShortContext::$arrayWithSteps = array();
-//         foreach (ShortContext::$arrayWithSteps as $value) {
-//             print '____________________'.$value;
-//         }
-//         print '______!!!!!!!!!!!!!!!!!!!!!!!!!!!______';
-//         foreach ($fullArrayWithText as $value) {
-//             print '____________________'.$value;
-//         }
-        
-        
-        
-        print '______!!!!!!!!!!!!!!_______=============================______________!!!!!!!!!!!!!______';
+        $fullArrayWithStep = $event->getScenario()->getSteps();
+        $diffArray = array_udiff($fullArrayWithStep, ShortContext::$arrayWithSteps, function ($obj_a, $obj_b) {
+            return strcmp($obj_a->getText(), $obj_b->getText());
+        });
+        $lastFailedStep = '';
+        if (count($diffArray) > 0) {
+            $lastFailedStep = end(ShortContext::$arrayWithSteps)->getText();
+        }
         foreach ($diffArray as $value) {
-            print '__________--__________'.$value->getText();
-            
             $keyWord = $value->getKeyword();
             $stepName = $value->getText();
-            ShortContext::$httpService->createStepItem($keyWord.' : '.$stepName);
-            
-            ShortContext::$httpService->finishStepItem(TestResults::SKIPPED,'SKIPPED');
-            
-            
+            ShortContext::$httpService->createStepItem($keyWord . ' : ' . $stepName);
+            ShortContext::$httpService->finishStepItem(TestResults::SKIPPED, 'SKIPPED. Skipped due to failure of \'' . $lastFailedStep . '\'.', AssertService::getStackTraceMessage());
         }
-        
-        
-        
-        
-        $statusCode = $event->getTestResult()->getResultCode(); 
+        $statusCode = $event->getTestResult()->getResultCode();
         ShortContext::$httpService->finishScrenarioItem($statusCode);
     }
-    
+
     /**
      * @AfterFeature
      */
     public static function finishFeature(AfterFeatureScope $event)
     {
-        $statusCode = $event->getTestResult()->getResultCode(); 
-        ShortContext::$httpService->finishFeatureItem($statusCode);
+        $featureDescription = $event->getFeature()->getDescription();
+        $statusCode = $event->getTestResult()->getResultCode();
+        ShortContext::$httpService->finishFeatureItem($statusCode, $featureDescription);
     }
-    
+
     /**
      * @AfterSuite
      */
     public static function finishLaunch(AfterSuiteScope $event)
     {
-        $statusCode = $event->getTestResult()->getResultCode(); 
+        $statusCode = $event->getTestResult()->getResultCode();
         ShortContext::$httpService->finishRootItem($statusCode);
         ShortContext::$httpService->finishTestRun($statusCode);
     }
