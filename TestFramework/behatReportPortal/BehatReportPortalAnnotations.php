@@ -1,9 +1,15 @@
 <?php
-namespace TestFramework\Services;
+namespace BehatReportPortal;
 
 use Behat\Testwork\Hook\Scope\HookScope;
 
-interface ReportPortalAnnotations
+/**
+ * Basic report portal annotations for Behat
+ * 
+ * @author Mikalai_Kabzar
+ *
+ */
+interface BehatReportPortalAnnotations
 {
 
     /**

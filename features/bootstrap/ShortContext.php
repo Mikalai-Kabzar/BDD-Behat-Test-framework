@@ -1,9 +1,6 @@
 <?php
 use Behat\Testwork\Hook\Scope\HookScope;
 use TestFramework\Services\AssertService;
-use TestFramework\Services\ReportPortalAnnotations;
-use TestFramework\Services\ReportPortalHTTPService;
-use TestFramework\Services\ReportPortalHelper;
 
 /**
  * Defines Short context.
