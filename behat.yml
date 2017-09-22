@@ -8,7 +8,7 @@ default:
               #- %paths.base%/features/Ticketmaster_features/ShortTest3.feature
                 #ShortTest2.feature
                 #/ticketmaster-navigation-failures.feature
-              - %paths.base%/features/Ticketmaster_features/ticketmaster-create-account-wrong-emails-many times (first time).feature
+             # - %paths.base%/features/Ticketmaster_features/ticketmaster-create-account-wrong-emails-many times (first time).feature
             contexts:
                 - ShortContext
                 - TicketmasterAccountContext

@@ -4,6 +4,7 @@ namespace BehatReportPortal;
 use Psr\Http\Message\ResponseInterface;
 use ReportPortal\ItemStatusesEnum;
 use ReportPortal\ReportPortalHTTPService;
+use ReportPortal\ItemTypesEnum;
 
 /**
  * Report portal HTTP/BDD service.
@@ -21,7 +22,7 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createFeatureItem(string $name)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$rootItemID, ReportPortalHTTPService::DEFAULT_FEATURE_DESCRIPTION, $name, 'SUITE', array());
+        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$rootItemID, ReportPortalHTTPService::DEFAULT_FEATURE_DESCRIPTION, $name, ItemTypesEnum::SUITE, array());
         ReportPortalHTTPService::$featureItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
         return $result;
     }
@@ -37,7 +38,7 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createScenarioItem(string $name, string $description)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$featureItemID, $description, $name, 'TEST', array());
+        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$featureItemID, $description, $name, ItemTypesEnum::TEST, array());
         ReportPortalHTTPService::$scenarioItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
         return $result;
     }
@@ -51,7 +52,7 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createStepItem(string $name)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$scenarioItemID, ReportPortalHTTPService::DEFAULT_STEP_DESCRIPTION, $name, 'STEP', array());
+        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$scenarioItemID, ReportPortalHTTPService::DEFAULT_STEP_DESCRIPTION, $name, ItemTypesEnum::STEP, array());
         ReportPortalHTTPService::$stepItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
         return $result;
     }

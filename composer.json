@@ -5,14 +5,13 @@
 		"emuse/behat-html-formatter" : "*",
 		"behat/mink-selenium2-driver" : "*",
 		"guzzlehttp/guzzle" : "~6.0",
-		"behat/mink-extension" : "*"	
+		"behat/mink-extension" : "*"
 	},
 	"autoload-dev" : {
 		"classmap" : [
 			"TestFramework/"
 		]
 	},
-
 	"config" : {
 		"bin-dir" : "bin"
 	}

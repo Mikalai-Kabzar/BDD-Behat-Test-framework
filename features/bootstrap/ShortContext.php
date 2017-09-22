@@ -1,5 +1,4 @@
 <?php
-use Behat\Testwork\Hook\Scope\HookScope;
 use TestFramework\Services\AssertService;
 
 /**

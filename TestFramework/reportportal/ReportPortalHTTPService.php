@@ -12,12 +12,13 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ReportPortalHTTPService
 {
+
     /**
      *
      * @var string
      */
     public const DAFAULT_LAUNCH_MODE = 'DEFAULT';
-    
+
     /**
      *
      * @var string

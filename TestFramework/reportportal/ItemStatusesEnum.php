@@ -3,7 +3,6 @@ namespace ReportPortal;
 
 class ItemStatusesEnum
 {
-
     const PASSED = 'PASSED';
 
     const FAILED = 'FAILED';
