@@ -92,8 +92,9 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
         return rmdir($dir);
     }
 
-    // * @AfterStep
+     
     /**
+     * 
      * Take screenshoot and save to $picFolder.
      */
     public function takeScreenshotAfterFailedStep($event)

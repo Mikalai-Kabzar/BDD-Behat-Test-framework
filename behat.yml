@@ -8,6 +8,7 @@ default:
               #- %paths.base%/features/Ticketmaster_features/ShortTest3.feature
                 #ShortTest2.feature
                 #/ticketmaster-navigation-failures.feature
+              - %paths.base%/features/Ticketmaster_features/ticketmaster-create-account-wrong-emails-many times (first time).feature
             contexts:
                 - ShortContext
                 - TicketmasterAccountContext
@@ -18,22 +19,15 @@ default:
      html:
       output_path: %paths.base%/build/html/behat
     extensions:
-        chartinger\Behat\TwigReportExtension\Extension:
-            templates:
-                dir: %paths.base%/twig/
-                file: default.twig
-            output:
-                file: %paths.base%/build/output/index.html
-        jarnaiz\JUnitFormatter\JUnitFormatterExtension:
-            filename: report.xml
-            outputDir: %paths.base%/build/tests
+                
         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
           name: html
-          renderer: Twig,Behat2
+          renderer: Behat2
           file_name: index
           print_args: true
           print_outp: true
-          loop_break: true        
+          loop_break: true  
+                
         Behat\MinkExtension:
             selenium2:
                 # chrome
