@@ -1,15 +1,17 @@
 <?php
 namespace TestFramework\Services;
 
-use Psr\Http\Message\ResponseInterface;
 use Behat\Testwork\Tester\Result\TestResults;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Assert services for autotests
  */
 class ReportPortalHTTPService
 {
-
+    private const EMPTY_ID = 'empty id';
+    
     private const DEFAULT_FEATURE_DESCRIPTION = '';
 
     private const DEFAULT_SCENARIO_DESCRIPTION = '';
@@ -17,34 +19,65 @@ class ReportPortalHTTPService
     private const DEFAULT_STEP_DESCRIPTION = '';
 
     private const FORMAT_DATE = 'Y-m-d\TH:i:s';
+    
+    private const ZONE = '.000Z+3';
 
-    private static $UUID = '07dd1f6d-d2d5-474f-90f8-fc14a59b49ad';
+    private const BASE_URI_TEMPLATE = 'http://%s/api/';
 
-    private static $baseURI = 'http://localhost:8080/api/';
+    private static $UUID;
 
-    private static $projectName = 'default_personal';
+    private static $baseURI;
 
-    private static $launchID;
+    private static $host;
 
-    private static $rootItemID;
+    private static $projectName;
 
-    private static $featureItemID;
+    private static $launchID = ReportPortalHTTPService::EMPTY_ID;
 
-    private static $scenarioItemID;
+    private static $rootItemID = ReportPortalHTTPService::EMPTY_ID;
 
-    private static $stepItemID;
+    private static $featureItemID = ReportPortalHTTPService::EMPTY_ID;
 
+    private static $scenarioItemID = ReportPortalHTTPService::EMPTY_ID;
+
+    private static $stepItemID = ReportPortalHTTPService::EMPTY_ID;
+    
     /**
      *
      * @var \GuzzleHttp\Client
      */
     private static $client;
-
+    
     function __construct()
     {
         ReportPortalHTTPService::$client = new \GuzzleHttp\Client([
             'base_uri' => ReportPortalHTTPService::$baseURI
         ]);
+    }
+    
+    public static function isSuiteRunned() {
+        return ReportPortalHTTPService::$rootItemID != ReportPortalHTTPService::EMPTY_ID;
+    }
+    
+    public static function isStepRunned() {
+        return ReportPortalHTTPService::$stepItemID != ReportPortalHTTPService::EMPTY_ID;
+    }
+    
+    public static function isScenarioRunned() {
+        return ReportPortalHTTPService::$scenarioItemID != ReportPortalHTTPService::EMPTY_ID;
+    }
+    
+    public static function isFeatureRunned() {
+        return ReportPortalHTTPService::$featureItemID != ReportPortalHTTPService::EMPTY_ID;
+    }
+    
+    public static function configureReportPortalHTTPService(string $yamlFilePath)
+    {
+        $yamlArray = YAML::parse($yamlFilePath);
+        ReportPortalHTTPService::$UUID = $yamlArray['UUID'];
+        ReportPortalHTTPService::$host = $yamlArray['host'];
+        ReportPortalHTTPService::$baseURI = sprintf(ReportPortalHTTPService::BASE_URI_TEMPLATE, ReportPortalHTTPService::$host);
+        ReportPortalHTTPService::$projectName = $yamlArray['projectName'];
     }
 
     public static function launchTestRun($name, $description, $mode, array $tags)
@@ -58,7 +91,7 @@ class ReportPortalHTTPService
                 'description' => $description,
                 'mode' => $mode,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'start_time' => ReportPortalHTTPService::getTime(),
                 'tags' => $tags
             )
         ));
@@ -75,11 +108,10 @@ class ReportPortalHTTPService
                 'Authorization' => 'bearer ' . ReportPortalHTTPService::$UUID
             ),
             'json' => array(
-                'end_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'end_time' => ReportPortalHTTPService::getTime(),
                 'status' => $status
             )
-        ));
-        ReportPortalHTTPService::$launchID = '';
+        ));       
         return $result;
     }
 
@@ -94,7 +126,7 @@ class ReportPortalHTTPService
                 'description' => $description,
                 'launch_id' => ReportPortalHTTPService::$launchID,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'start_time' => ReportPortalHTTPService::getTime(),
                 "tags" => $tags,
                 "type" => "SUITE",
                 "uniqueId" => "string"
@@ -107,7 +139,7 @@ class ReportPortalHTTPService
     public static function finishRootItem($statusCode)
     {
         $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$rootItemID, TestResults::PASSED, '');
-        ReportPortalHTTPService::$rootItemID = '';
+        ReportPortalHTTPService::$rootItemID = ReportPortalHTTPService::EMPTY_ID;
         return $result;
     }
 
@@ -134,32 +166,32 @@ class ReportPortalHTTPService
 
     public static function finishStepItem($statusCode, $description, $stackTrace)
     {
-        $actualDescription = '';      
+        $actualDescription = '';
         if ($statusCode == TestResults::SKIPPED) {
             ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $description, 'info');
             $actualDescription = $description;
-        } 
+        }
         if ($statusCode == TestResults::FAILED) {
             ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $stackTrace, 'error');
             $actualDescription = $description;
-        } 
-            
+        }
+        
         $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$stepItemID, $statusCode, $actualDescription);
-        ReportPortalHTTPService::$stepItemID = '';
+        ReportPortalHTTPService::$stepItemID = ReportPortalHTTPService::EMPTY_ID;
         return $result;
     }
 
     public static function finishScrenarioItem($statusCode)
     {
         $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$scenarioItemID, $statusCode, '');
-        ReportPortalHTTPService::$scenarioItemID = '';
+        ReportPortalHTTPService::$scenarioItemID = ReportPortalHTTPService::EMPTY_ID;
         return $result;
     }
 
     public static function finishFeatureItem($statusCode, $description)
     {
         $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$featureItemID, $statusCode, $description);
-        ReportPortalHTTPService::$featureItemID = '';
+        ReportPortalHTTPService::$featureItemID = ReportPortalHTTPService::EMPTY_ID;
         return $result;
     }
 
@@ -173,7 +205,7 @@ class ReportPortalHTTPService
             'json' => array(
                 'item_id' => $item_id,
                 'message' => $message,
-                'time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'time' => ReportPortalHTTPService::getTime(),
                 'level' => $logLevel
             )
         ));
@@ -197,7 +229,7 @@ class ReportPortalHTTPService
                 'description' => $description,
                 'launch_id' => ReportPortalHTTPService::$launchID,
                 'name' => $name,
-                'start_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'start_time' => ReportPortalHTTPService::getTime(),
                 'tags' => $tags,
                 'type' => $type,
                 'uniqueId' => 'string'
@@ -216,7 +248,7 @@ class ReportPortalHTTPService
             ),
             'json' => array(
                 'description' => $description,
-                'end_time' => date(ReportPortalHTTPService::FORMAT_DATE),
+                'end_time' => ReportPortalHTTPService::getTime(),
                 'status' => $status
             )
         ));
@@ -233,5 +265,9 @@ class ReportPortalHTTPService
             $status = 'SKIPPED';
         }
         return $status;
+    }
+    
+    private static function getTime() {
+        return date(ReportPortalHTTPService::FORMAT_DATE).ReportPortalHTTPService::ZONE;
     }
 }

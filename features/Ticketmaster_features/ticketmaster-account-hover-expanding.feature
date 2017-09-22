@@ -17,3 +17,13 @@ I need to be able to have access to account pages
     When I hover music nav-button 
     And I wait '1' seconds
     Then My account dropdown is not opened 
+    
+   Scenario: Hover "My account" button and check this one is opened1.
+    Given I am on Ticketmaster
+
+    When I hover music nav-button 
+    And I wait '1' seconds
+    Then My account dropdown is not opened
+    
+       Scenario: Hover "My account" button and check this one is opened2.
+    Given I am on Ticketmaster

@@ -1,17 +1,18 @@
 <?php
 use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\MinkExtension\Context\RawMinkContext;
-
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Testwork\Hook\Scope\HookScope;
+use TestFramework\Services\ReportPortalAnnotations;
 use TestFramework\Services\ReportPortalHTTPService;
+use TestFramework\Services\ReportPortalHelper;
 use TestFramework\Services\Service;
 use WebDriver\Exception;
 
 /**
  * Defines basic application features from the specific context.
  */
-abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext
+abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext, ReportPortalAnnotations
 {
 
     // protected static $httpService;
@@ -116,6 +117,65 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
                     print "Screenshot for '{$stepText}' placed in " . $fullFilePath . "\n";
                 }
             }
+        }
+    }
+
+    public static function startLaunch(HookScope $event)
+    { 
+        
+        if (! ReportPortalHTTPService::isSuiteRunned()) {
+            print 'start launch';
+            ReportPortalHTTPService::configureReportPortalHTTPService('config.yaml');
+            ReportPortalHelper::startLaunch($event);
+        }
+    }
+
+    public static function startFeature(HookScope $event)
+    {
+        if (! ReportPortalHTTPService::isFeatureRunned()) {
+            ReportPortalHelper::startFeature($event);
+        }
+    }
+
+    public static function startScenario(HookScope $event)
+    {
+        if (! ReportPortalHTTPService::isScenarioRunned()) {
+            ReportPortalHelper::startScenario($event);
+        }
+    }
+
+    public static function startStep(HookScope $event)
+    {
+        if (! ReportPortalHTTPService::isStepRunned()) {
+            ReportPortalHelper::startStep($event);
+        }
+    }
+
+    public static function finishStep(HookScope $event)
+    {
+        if (ReportPortalHTTPService::isStepRunned()) {
+            ReportPortalHelper::finishStep($event);
+        }
+    }
+
+    public static function finishScenario(HookScope $event)
+    {
+        if (ReportPortalHTTPService::isScenarioRunned()) {
+            ReportPortalHelper::finishScenario($event);
+        }
+    }
+
+    public static function finishFeature(HookScope $event)
+    {
+        if (ReportPortalHTTPService::isFeatureRunned()) {
+            ReportPortalHelper::finishFeature($event);
+        }
+    }
+
+    public static function finishLaunch(HookScope $event)
+    {
+        if (ReportPortalHTTPService::isSuiteRunned()) {
+            ReportPortalHelper::finishLaunch($event);
         }
     }
 }
