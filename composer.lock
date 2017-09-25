@@ -1198,12 +1198,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mikalai-Kabzar/ReportPortal-Basic.git",
-                "reference": "b685cc3875a8dadbdd96f5a79baea86caadaf8c6"
+                "reference": "0e94a8919655d0f91110f0b745e8a38c7b1bf6d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Basic/zipball/b685cc3875a8dadbdd96f5a79baea86caadaf8c6",
-                "reference": "b685cc3875a8dadbdd96f5a79baea86caadaf8c6",
+                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Basic/zipball/0e94a8919655d0f91110f0b745e8a38c7b1bf6d5",
+                "reference": "0e94a8919655d0f91110f0b745e8a38c7b1bf6d5",
                 "shasum": ""
             },
             "require": {
@@ -1213,9 +1213,9 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "reportPortal/"
-                ]
+                "psr-4": {
+                    "ReportPortal\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1235,7 +1235,7 @@
                 "report",
                 "reporting"
             ],
-            "time": "2017-09-25T08:07:09+00:00"
+            "time": "2017-09-25T09:42:10+00:00"
         },
         {
             "name": "symfony/class-loader",
