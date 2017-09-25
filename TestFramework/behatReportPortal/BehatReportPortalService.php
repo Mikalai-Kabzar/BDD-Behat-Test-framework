@@ -11,8 +11,8 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
 use Behat\Testwork\Hook\Scope\HookScope;
 use Behat\Testwork\Tester\Result\TestResults;
-use ReportPortal\ItemStatusesEnum;
-use ReportPortal\ReportPortalHTTPService;
+use ReportPortal\Enum\ItemStatusesEnum;
+use ReportPortal\Service\ReportPortalHTTPService;
 use TestFramework\Services\AssertService;
 
 /**

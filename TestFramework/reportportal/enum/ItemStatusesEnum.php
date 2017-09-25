@@ -1,6 +1,11 @@
 <?php
-namespace ReportPortal;
+namespace ReportPortal\Enum;
 
+/**
+ * Enum describes report portal items' statuses.
+ *
+ * @author Mikalai_Kabzar
+ */
 class ItemStatusesEnum
 {
     const PASSED = 'PASSED';
@@ -15,4 +20,3 @@ class ItemStatusesEnum
 
     const CANCELLED = 'CANCELLED';
 }
-

@@ -2,9 +2,9 @@
 namespace BehatReportPortal;
 
 use Psr\Http\Message\ResponseInterface;
-use ReportPortal\ItemStatusesEnum;
-use ReportPortal\ReportPortalHTTPService;
-use ReportPortal\ItemTypesEnum;
+use ReportPortal\Enum\ItemStatusesEnum;
+use ReportPortal\Enum\ItemTypesEnum;
+use ReportPortal\Service\ReportPortalHTTPService;
 
 /**
  * Report portal HTTP/BDD service.

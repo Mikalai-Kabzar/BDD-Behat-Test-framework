@@ -1,5 +1,5 @@
 <?php
-namespace ReportPortal;
+namespace ReportPortal\Service;
 
 use Behat\Testwork\Tester\Result\TestResults;
 use GuzzleHttp\Client;
@@ -9,6 +9,8 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Report portal HTTP service.
  * Provides basic methods to collaborate with Report portal.
+ *
+ * @author Mikalai_Kabzar
  */
 class ReportPortalHTTPService
 {
@@ -360,7 +362,6 @@ class ReportPortalHTTPService
     }
 
     /**
-     *
      * Finish item by id
      *
      * @param string $itemID
@@ -388,7 +389,6 @@ class ReportPortalHTTPService
     }
 
     /**
-     *
      * Get local time
      *
      * @return string with local time

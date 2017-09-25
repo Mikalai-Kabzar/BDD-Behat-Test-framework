@@ -1,9 +1,13 @@
 <?php
-namespace ReportPortal;
+namespace ReportPortal\Enum;
 
+/**
+ * Enum describes report portal items' types.
+ *
+ * @author Mikalai_Kabzar
+ */
 class ItemTypesEnum
 {
-
     const SUITE = 'SUITE';
 
     const STORY = 'STORY';
@@ -34,4 +38,3 @@ class ItemTypesEnum
 
     const AFTER_TEST = 'AFTER_TEST';
 }
-
