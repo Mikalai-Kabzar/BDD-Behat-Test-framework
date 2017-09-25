@@ -1,5 +1,5 @@
 <?php
-namespace BehatReportPortal;
+namespace ReportPortal\Behat;
 
 use Behat\Testwork\Hook\Scope\HookScope;
 

@@ -11,8 +11,8 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
 use Behat\Testwork\Hook\Scope\HookScope;
 use Behat\Testwork\Tester\Result\TestResults;
-use ReportPortal\Enum\ItemStatusesEnum;
-use ReportPortal\Service\ReportPortalHTTPService;
+use ReportPortal\Basic\Enum\ItemStatusesEnum;
+use ReportPortal\Basic\Service\ReportPortalHTTPService;
 use TestFramework\Services\AssertService;
 
 /**
@@ -50,7 +50,7 @@ class BehatReportPortalService
      */
     public static function setLaunchPrefix(string $launchPrefix)
     {
-        BehatReportPortalService::$launchPrefix = $launchPrefix;
+        self::$launchPrefix = $launchPrefix;
     }
 
     /**
@@ -62,9 +62,9 @@ class BehatReportPortalService
     public static function startLaunch(BeforeSuiteScope $event)
     {
         $suiteName = $event->getSuite()->getName();
-        BehatReportPortalService::$httpService = new ReportPortalHTTP_BDDService();
-        BehatReportPortalService::$httpService->launchTestRun(BehatReportPortalService::$launchPrefix . $suiteName, '', ReportPortalHTTPService::DAFAULT_LAUNCH_MODE, array());
-        BehatReportPortalService::$httpService->createRootItem($suiteName, '', array());
+        self::$httpService = new ReportPortalHTTP_BDDService();
+        self::$httpService->launchTestRun(self::$launchPrefix . $suiteName, '', ReportPortalHTTPService::DAFAULT_LAUNCH_MODE, array());
+        self::$httpService->createRootItem($suiteName, '', array());
     }
 
     /**
@@ -77,7 +77,7 @@ class BehatReportPortalService
     {
         $featureName = $event->getFeature()->getTitle();
         $keyWord = $event->getFeature()->getKeyword();
-        BehatReportPortalService::$httpService->createFeatureItem($keyWord . ' : ' . $featureName, '');
+        self::$httpService->createFeatureItem($keyWord . ' : ' . $featureName, '');
     }
 
     /**
@@ -88,11 +88,11 @@ class BehatReportPortalService
      */
     public static function startScenario(BeforeScenarioScope $event)
     {
-        BehatReportPortalService::$arrayWithSteps = array();
+        self::$arrayWithSteps = array();
         $keyWord = $event->getScenario()->getKeyword();
         $scenarioTitle = $event->getScenario()->getTitle();
         $description = '';
-        if (BehatReportPortalService::SCENARIO_OUTLINE_KEYWORD == $keyWord) {
+        if (self::SCENARIO_OUTLINE_KEYWORD == $keyWord) {
             $scenarios = $event->getFeature()->getScenarios();
             $scenarioLine = $event->getScenario()->getLine();
             $scenarioIndex = 0;
@@ -108,7 +108,7 @@ class BehatReportPortalService
             $scenarioName = $keyWord . ' : ' . $scenarioTitle;
             $description = '';
         }
-        BehatReportPortalService::$httpService->createScenarioItem($scenarioName, $description);
+        self::$httpService->createScenarioItem($scenarioName, $description);
     }
 
     /**
@@ -121,7 +121,7 @@ class BehatReportPortalService
     {
         $keyWord = $event->getStep()->getKeyword();
         $stepName = $event->getStep()->getText();
-        BehatReportPortalService::$httpService->createStepItem($keyWord . ' : ' . $stepName);
+        self::$httpService->createStepItem($keyWord . ' : ' . $stepName);
     }
 
     /**
@@ -132,9 +132,9 @@ class BehatReportPortalService
      */
     public static function finishStep(AfterStepScope $event)
     {
-        array_push(BehatReportPortalService::$arrayWithSteps, $event->getStep());
-        $status = BehatReportPortalService::getEventStatus($event);
-        BehatReportPortalService::$httpService->finishStepItem($status, AssertService::getAssertMessage(), AssertService::getStackTraceMessage());
+        array_push(self::$arrayWithSteps, $event->getStep());
+        $status = self::getEventStatus($event);
+        self::$httpService->finishStepItem($status, AssertService::getAssertMessage(), AssertService::getStackTraceMessage());
     }
 
     /**
@@ -146,21 +146,21 @@ class BehatReportPortalService
     public static function finishScenario(AfterScenarioScope $event)
     {
         $fullArrayWithStep = $event->getScenario()->getSteps();
-        $diffArray = array_udiff($fullArrayWithStep, BehatReportPortalService::$arrayWithSteps, function ($obj_a, $obj_b) {
+        $diffArray = array_udiff($fullArrayWithStep, self::$arrayWithSteps, function ($obj_a, $obj_b) {
             return strcmp($obj_a->getText(), $obj_b->getText());
         });
         $lastFailedStep = '';
         if (count($diffArray) > 0) {
-            $lastFailedStep = end(BehatReportPortalService::$arrayWithSteps)->getText();
+            $lastFailedStep = end(self::$arrayWithSteps)->getText();
         }
         foreach ($diffArray as $value) {
             $keyWord = $value->getKeyword();
             $stepName = $value->getText();
-            BehatReportPortalService::$httpService->createStepItem($keyWord . ' : ' . $stepName);
-            BehatReportPortalService::$httpService->finishStepItem(ItemStatusesEnum::SKIPPED, 'SKIPPED. Skipped due to failure of \'' . $lastFailedStep . '\'.', AssertService::getStackTraceMessage());
+            self::$httpService->createStepItem($keyWord . ' : ' . $stepName);
+            self::$httpService->finishStepItem(ItemStatusesEnum::SKIPPED, 'SKIPPED. Skipped due to failure of \'' . $lastFailedStep . '\'.', AssertService::getStackTraceMessage());
         }
-        $status = BehatReportPortalService::getEventStatus($event);
-        BehatReportPortalService::$httpService->finishScrenarioItem($status);
+        $status = self::getEventStatus($event);
+        self::$httpService->finishScrenarioItem($status);
     }
 
     /**
@@ -172,8 +172,8 @@ class BehatReportPortalService
     public static function finishFeature(AfterFeatureScope $event)
     {
         $featureDescription = $event->getFeature()->getDescription();
-        $status = BehatReportPortalService::getEventStatus($event);
-        BehatReportPortalService::$httpService->finishFeatureItem($status, $featureDescription);
+        $status = self::getEventStatus($event);
+        self::$httpService->finishFeatureItem($status, $featureDescription);
     }
 
     /**
@@ -184,9 +184,9 @@ class BehatReportPortalService
      */
     public static function finishLaunch(AfterSuiteScope $event)
     {
-        $status = BehatReportPortalService::getEventStatus($event);
-        BehatReportPortalService::$httpService->finishRootItem($status);
-        BehatReportPortalService::$httpService->finishTestRun($status);
+        $status = self::getEventStatus($event);
+        self::$httpService->finishRootItem($status);
+        self::$httpService->finishTestRun($status);
     }
 
     /**

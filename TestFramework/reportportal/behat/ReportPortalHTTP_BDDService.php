@@ -2,9 +2,9 @@
 namespace BehatReportPortal;
 
 use Psr\Http\Message\ResponseInterface;
-use ReportPortal\Enum\ItemStatusesEnum;
-use ReportPortal\Enum\ItemTypesEnum;
-use ReportPortal\Service\ReportPortalHTTPService;
+use ReportPortal\Basic\Enum\ItemStatusesEnum;
+use ReportPortal\Basic\Enum\ItemTypesEnum;
+use ReportPortal\Basic\Service\ReportPortalHTTPService;
 
 /**
  * Report portal HTTP/BDD service.
@@ -22,8 +22,8 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createFeatureItem(string $name)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$rootItemID, ReportPortalHTTPService::DEFAULT_FEATURE_DESCRIPTION, $name, ItemTypesEnum::SUITE, array());
-        ReportPortalHTTPService::$featureItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
+        $result = self::startChildItem(self::$rootItemID, self::DEFAULT_FEATURE_DESCRIPTION, $name, ItemTypesEnum::SUITE, array());
+        self::$featureItemID = self::getValueFromResponse('id', $result);
         return $result;
     }
 
@@ -38,8 +38,8 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createScenarioItem(string $name, string $description)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$featureItemID, $description, $name, ItemTypesEnum::TEST, array());
-        ReportPortalHTTPService::$scenarioItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
+        $result = self::startChildItem(self::$featureItemID, $description, $name, ItemTypesEnum::TEST, array());
+        self::$scenarioItemID = self::getValueFromResponse('id', $result);
         return $result;
     }
 
@@ -52,8 +52,8 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function createStepItem(string $name)
     {
-        $result = ReportPortalHTTPService::startChildItem(ReportPortalHTTPService::$scenarioItemID, ReportPortalHTTPService::DEFAULT_STEP_DESCRIPTION, $name, ItemTypesEnum::STEP, array());
-        ReportPortalHTTPService::$stepItemID = ReportPortalHTTPService::getValueFromResponse('id', $result);
+        $result = self::startChildItem(self::$scenarioItemID, self::DEFAULT_STEP_DESCRIPTION, $name, ItemTypesEnum::STEP, array());
+        self::$stepItemID = self::getValueFromResponse('id', $result);
         return $result;
     }
 
@@ -72,15 +72,15 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
     {
         $actualDescription = '';
         if ($itemStatus == ItemStatusesEnum::SKIPPED) {
-            ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $description, 'info');
+            self::addLogMessage(self::$stepItemID, $description, 'info');
             $actualDescription = $description;
         }
         if ($itemStatus == ItemStatusesEnum::FAILED) {
-            ReportPortalHTTPService::addLogMessage(ReportPortalHTTPService::$stepItemID, $stackTrace, 'error');
+            self::addLogMessage(self::$stepItemID, $stackTrace, 'error');
             $actualDescription = $description;
         }
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$stepItemID, $itemStatus, $actualDescription);
-        ReportPortalHTTPService::$stepItemID = ReportPortalHTTPService::EMPTY_ID;
+        $result = self::finishItem(self::$stepItemID, $itemStatus, $actualDescription);
+        self::$stepItemID = self::EMPTY_ID;
         return $result;
     }
 
@@ -93,8 +93,8 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function finishScrenarioItem(string $scenarioStatus)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$scenarioItemID, $scenarioStatus, '');
-        ReportPortalHTTPService::$scenarioItemID = ReportPortalHTTPService::EMPTY_ID;
+        $result = self::finishItem(self::$scenarioItemID, $scenarioStatus, '');
+        self::$scenarioItemID = self::EMPTY_ID;
         return $result;
     }
 
@@ -109,8 +109,8 @@ class ReportPortalHTTP_BDDService extends ReportPortalHTTPService
      */
     public static function finishFeatureItem(string $testStatus, string $description)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$featureItemID, $testStatus, $description);
-        ReportPortalHTTPService::$featureItemID = ReportPortalHTTPService::EMPTY_ID;
+        $result = self::finishItem(self::$featureItemID, $testStatus, $description);
+        self::$featureItemID = self::EMPTY_ID;
         return $result;
     }
 }

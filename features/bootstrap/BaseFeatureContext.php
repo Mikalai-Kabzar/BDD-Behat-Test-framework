@@ -1,11 +1,11 @@
 <?php
-use BehatReportPortal\BehatReportPortalAnnotations;
 use BehatReportPortal\BehatReportPortalService;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Testwork\Hook\Scope\HookScope;
-use ReportPortal\ReportPortalHTTPService;
+use ReportPortal\Basic\Service\ReportPortalHTTPService;
+use ReportPortal\Behat\BehatReportPortalAnnotations;
 use TestFramework\Services\Service;
 use WebDriver\Exception;
 

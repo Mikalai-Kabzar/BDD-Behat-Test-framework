@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f9f9f6a886e68ee52093e625f104dd3",
+    "content-hash": "96fcd508d3bfed3214b3d07e6d5eeb4d",
     "packages": [
         {
             "name": "behat/behat",
@@ -1193,6 +1193,51 @@
             "time": "2016-10-10T12:19:37+00:00"
         },
         {
+            "name": "reportportal/basic",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mikalai-Kabzar/ReportPortal-Basic.git",
+                "reference": "b685cc3875a8dadbdd96f5a79baea86caadaf8c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Basic/zipball/b685cc3875a8dadbdd96f5a79baea86caadaf8c6",
+                "reference": "b685cc3875a8dadbdd96f5a79baea86caadaf8c6",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "*",
+                "psr/http-message": "*",
+                "symfony/yaml": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "reportPortal/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kabzar Mikalai",
+                    "email": "loki.engine@mail.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Basic classes for Report Portal collaboration",
+            "homepage": "https://github.com/Mikalai-Kabzar/ReportPortal",
+            "keywords": [
+                "Report Portal",
+                "report",
+                "reporting"
+            ],
+            "time": "2017-09-25T08:07:09+00:00"
+        },
+        {
             "name": "symfony/class-loader",
             "version": "v3.3.9",
             "source": {
@@ -1887,7 +1932,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "behat/behat": 0
+        "behat/behat": 0,
+        "reportportal/basic": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
