@@ -1,9 +1,9 @@
 <?php
 namespace ReportPortal\Service;
 
-use Behat\Testwork\Tester\Result\TestResults;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use ReportPortal\Enum\ItemStatusesEnum;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -178,7 +178,7 @@ class ReportPortalHTTPService
      */
     public static function configureReportPortalHTTPService(string $yamlFilePath)
     {
-        $yamlArray = YAML::parse($yamlFilePath);
+        $yamlArray = Yaml::parse($yamlFilePath);
         ReportPortalHTTPService::$UUID = $yamlArray['UUID'];
         ReportPortalHTTPService::$host = $yamlArray['host'];
         ReportPortalHTTPService::$baseURI = sprintf(ReportPortalHTTPService::BASE_URI_TEMPLATE, ReportPortalHTTPService::$host);
@@ -280,7 +280,7 @@ class ReportPortalHTTPService
      */
     public static function finishRootItem(string $resultStatus)
     {
-        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$rootItemID, TestResults::PASSED, '');
+        $result = ReportPortalHTTPService::finishItem(ReportPortalHTTPService::$rootItemID, ItemStatusesEnum::PASSED, '');
         ReportPortalHTTPService::$rootItemID = ReportPortalHTTPService::EMPTY_ID;
         return $result;
     }
