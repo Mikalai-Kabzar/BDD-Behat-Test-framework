@@ -54,7 +54,7 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
         $this->getSession()
             ->getDriver()
             ->setTimeouts([
-            'page load' => 15000
+            'page load' => 25000
         ]);
         $this->setSessionToServices();
     }
