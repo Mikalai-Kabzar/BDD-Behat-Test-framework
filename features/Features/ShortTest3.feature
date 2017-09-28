@@ -1,4 +1,4 @@
-Feature: Test basic navigation of 'Ticketmaster' website 1232
+Feature: Test basic navigation of 'Application' website 1232
   In order to test 'Application' website
   As a auto-tester and user
   I need to be able to navigate using basic nav-buttons

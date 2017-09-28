@@ -2,8 +2,9 @@
 
 namespace TestFramework\Pages\Application;
 
+use TestFramework\Pages\Application\Dropdowns\MyAccountDropdown;
 use TestFramework\Services\WebElementsService;
-use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;
+
 
 /**
  * Defines Main page.
