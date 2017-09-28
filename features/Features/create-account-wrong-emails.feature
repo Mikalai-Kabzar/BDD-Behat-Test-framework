@@ -1,7 +1,7 @@
 Feature: Test account creation features with wrong e-mails (first opening of a page)
-In order to test 'Ticketmaster' website
-As a new user
-I need to get error message caused by using not existed e-mail.
+  In order to test 'Application' website
+  As a new user
+  I need to get error message caused by using not existed e-mail.
 
   Scenario Outline: Try to create account error message caused by using not existed e-mail (first opening of a page).
     Given I am on Application

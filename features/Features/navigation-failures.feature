@@ -1,5 +1,5 @@
 Feature: Test basic navigation of 'Ticketmaster' website using tests with failures
-  In order to test 'Ticketmaster' website
+  In order to test 'Application' website
   As a auto-tester and user
   I need to be able to navigate using basic nav-buttons using tests with failures
 
