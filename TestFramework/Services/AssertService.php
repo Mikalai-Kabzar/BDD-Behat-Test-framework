@@ -20,7 +20,7 @@ class AssertService
      */
     public static function assertEquals($expected, $actual)
     {
-        self::asserEquals($expected, $actual);
+        self::asserEquals($expected, $actual,'ATATA ERROR !!!!!');
     }
 
     /**
@@ -36,7 +36,7 @@ class AssertService
         self::asserEquals($expected, WebElementsService::isElementExists($xpath));
     }
 
-    private static function asserEquals($func, ...$params)
+    private static function asserEquals(...$params)
     {
         self::handleException('PHPUnit_Framework_Assert::assertEquals', ...$params);
     }

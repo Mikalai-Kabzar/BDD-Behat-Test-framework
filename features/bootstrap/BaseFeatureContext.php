@@ -7,7 +7,6 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Testwork\Hook\Scope\HookScope;
-
 use ReportPortalBasic\Service\ReportPortalHTTPService;
 use TestFramework\Services\Service;
 use WebDriver\Exception;
@@ -49,7 +48,7 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
         $this->getSession()
             ->getDriver()
             ->setTimeouts([
-                'page load' => 25000
+                'page load' => 30000
             ]);
         Service::setSession($this->getSession());
     }
@@ -85,14 +84,16 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
 
     public static function finishStep(HookScope $event)
     {
+
         if (ReportPortalHTTPService::isStepRunned()) {
+            $pictureAsString = '';
             if ($event->getTestResult()->getResultCode() === TestResult::FAILED) {
                 $session = Service::getSession();
                 if ($session != null) {
-                    ReportPortalHTTPService::addLogMessageWithPicture($session->getDriver()->getScreenshot(), 'nothing', 'picture', 'ERROR', 'png');
+                    $pictureAsString = $session->getDriver()->getScreenshot();
                 }
             }
-            BehatReportPortalService::finishStep($event);
+            BehatReportPortalService::finishStep($event, $pictureAsString);
         }
     }
 

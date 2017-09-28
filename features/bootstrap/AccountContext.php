@@ -1,15 +1,16 @@
 <?php
 
 use Behat\Gherkin\Node\TableNode;
-use TestFramework\Pages\Ticketmaster\MainPage;
-use TestFramework\Pages\Ticketmaster\SignInPage;
+
+use TestFramework\Pages\Application\MainPage;
+use TestFramework\Pages\Application\SignInPage;
 use TestFramework\Services\AssertService;
 use TestFramework\Services\WebElementsService;
 
 /**
- * Defines Ticketmaster account context.
+ * Defines Application account context.
  */
-class TicketmasterAccountContext extends BaseFeatureContext {
+class AccountContext extends BaseFeatureContext {
 
     /**
      * @When I hover on My account button
@@ -50,7 +51,7 @@ class TicketmasterAccountContext extends BaseFeatureContext {
     }
 
     /**
-     * @When I click on SIgn in button
+     * @When I click on Sign in button
      */
     public function iClickOnSignInButton() {
         MainPage::getMyAccountDropDown()->clickSignIn();

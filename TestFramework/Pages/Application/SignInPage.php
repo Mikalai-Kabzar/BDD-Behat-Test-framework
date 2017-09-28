@@ -1,6 +1,6 @@
 <?php
 
-namespace TestFramework\Pages\Ticketmaster;
+namespace TestFramework\Pages\Application;
 
 /**
  * Defines Sign In Page.

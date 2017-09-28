@@ -4,7 +4,7 @@ As a new user
 I need to be able to click on 'My account' dropdown options and have redirect to 'Sigh in' page
 
   Scenario: Expand 'My account' dropdown and click on options to be redirected on Sign in page (using table)
-    Given I am on Ticketmaster
+    Given I am on Application
     When I hover on My account button
     And I wait '1' seconds
     And I click on option of My Account dropdown 

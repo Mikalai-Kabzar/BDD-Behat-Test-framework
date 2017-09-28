@@ -1,16 +1,16 @@
 <?php
 
-use TestFramework\Pages\Ticketmaster\ErrorMessagesPage;
-use TestFramework\Pages\Ticketmaster\SignInToMyAccountPage;
+use TestFramework\Pages\Application\ErrorMessagesPage;
+use TestFramework\Pages\Application\SignInToMyAccountPage;
 use TestFramework\Services\AssertService;
 
 /**
- * Defines Ticketmaster sign in context.
+ * Defines Application sign in context.
  */
-class TicketmasterSIgnInContext extends BaseFeatureContext {
+class SignInContext extends BaseFeatureContext {
 
     /**
-     * @When I enter :password password to Ticketmaster Password field on Sign In to My Account page
+     * @When I enter :password password to Application Password field on Sign In to My Account page
      */
     public function iEnterPasswordToTicketmasterPasswordFieldOnSignInToMyAccountPage($password) {
         SignInToMyAccountPage::fillPassword($password);

@@ -1211,12 +1211,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mikalai-Kabzar/ReportPortal-Basic.git",
-                "reference": "03b24f16546d21d8faeb013b15ce056598c6d8cc"
+                "reference": "12b72b846b80909eba0a55817ac10f2e7524b690"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Basic/zipball/03b24f16546d21d8faeb013b15ce056598c6d8cc",
-                "reference": "03b24f16546d21d8faeb013b15ce056598c6d8cc",
+                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Basic/zipball/12b72b846b80909eba0a55817ac10f2e7524b690",
+                "reference": "12b72b846b80909eba0a55817ac10f2e7524b690",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1248,7 @@
                 "report",
                 "reporting"
             ],
-            "time": "2017-09-25T12:30:12+00:00"
+            "time": "2017-09-28T07:42:20+00:00"
         },
         {
             "name": "reportportal/behat",
@@ -1256,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mikalai-Kabzar/ReportPortal-Behat.git",
-                "reference": "fbfa140056a4099102a44a74955225f8d03147c1"
+                "reference": "c4f7e0f8e57083b9e6ed115c5e50e6f7c5202443"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Behat/zipball/fbfa140056a4099102a44a74955225f8d03147c1",
-                "reference": "fbfa140056a4099102a44a74955225f8d03147c1",
+                "url": "https://api.github.com/repos/Mikalai-Kabzar/ReportPortal-Behat/zipball/c4f7e0f8e57083b9e6ed115c5e50e6f7c5202443",
+                "reference": "c4f7e0f8e57083b9e6ed115c5e50e6f7c5202443",
                 "shasum": ""
             },
             "require": {
@@ -1293,7 +1293,7 @@
                 "report",
                 "reporting"
             ],
-            "time": "2017-09-25T12:26:17+00:00"
+            "time": "2017-09-28T07:39:22+00:00"
         },
         {
             "name": "symfony/class-loader",
@@ -1705,12 +1705,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "9cc3a81095fae8ec0654f7b568108e78ef893fc9"
+                "reference": "c5a19a202c0df68e6a30ca0336c9b474b13591d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/9cc3a81095fae8ec0654f7b568108e78ef893fc9",
-                "reference": "9cc3a81095fae8ec0654f7b568108e78ef893fc9",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/c5a19a202c0df68e6a30ca0336c9b474b13591d1",
+                "reference": "c5a19a202c0df68e6a30ca0336c9b474b13591d1",
                 "shasum": ""
             },
             "require": {
@@ -1746,7 +1746,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-15T10:12:22+00:00"
+            "time": "2017-09-18T08:06:42+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1926,12 +1926,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "103cae817d68b56ddcb50c051a6ed7980d746409"
+                "reference": "d8d888e2ae694c8057d6b0201b7b8f6f07d430cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/103cae817d68b56ddcb50c051a6ed7980d746409",
-                "reference": "103cae817d68b56ddcb50c051a6ed7980d746409",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d8d888e2ae694c8057d6b0201b7b8f6f07d430cc",
+                "reference": "d8d888e2ae694c8057d6b0201b7b8f6f07d430cc",
                 "shasum": ""
             },
             "require": {
@@ -1984,7 +1984,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-08-19T17:43:10+00:00"
+            "time": "2017-09-27T18:11:00+00:00"
         }
     ],
     "packages-dev": [],

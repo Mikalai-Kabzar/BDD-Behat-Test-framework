@@ -2,18 +2,18 @@ default:
     suites:
         My_suite_features:
             paths:
-              - %paths.base%/features/Ticketmaster_features
-              #- %paths.base%/features/Ticketmaster_features/ShortTest1.feature
-              #- %paths.base%/features/Ticketmaster_features/ShortTest2.feature  
-              #- %paths.base%/features/Ticketmaster_features/ShortTest3.feature
+              - %paths.base%/features/Features
+              #- %paths.base%/features/Features/ShortTest1.feature
+              #- %paths.base%/features/Features/ShortTest2.feature
+              #- %paths.base%/features/Features/ShortTest3.feature
                 #ShortTest2.feature
-                #/ticketmaster-navigation-failures.feature
-             # - %paths.base%/features/Ticketmaster_features/ticketmaster-create-account-wrong-emails-many times (first time).feature
+                #/navigation-failures.feature
+             # - %paths.base%/features/Features/create-account-wrong-emails-many times (first time).feature
             contexts:
                 - ShortContext
-                - TicketmasterAccountContext
-                - TicketmasterNavigationContext
-                - TicketmasterSignInContext
+                - AccountContext
+                - NavigationContext
+                - SignInContext
     formatters:
      pretty: ~
      html:

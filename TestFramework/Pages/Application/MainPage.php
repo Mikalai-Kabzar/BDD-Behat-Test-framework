@@ -1,6 +1,6 @@
 <?php
 
-namespace TestFramework\Pages\Ticketmaster;
+namespace TestFramework\Pages\Application;
 
 use TestFramework\Services\WebElementsService;
 use TestFramework\Pages\Ticketmaster\Dropdowns\MyAccountDropdown;

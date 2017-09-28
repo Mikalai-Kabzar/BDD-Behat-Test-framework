@@ -1,6 +1,6 @@
 <?php
 
-namespace TestFramework\Pages\Ticketmaster;
+namespace TestFramework\Pages\Application;
 
 use TestFramework\Services\WebElementsService;
 
@@ -30,7 +30,7 @@ class SignInToMyAccountPage {
     }
 
     /**
-     * Fill 'Ticketmaster Password' field.
+     * Fill 'Application Password' field.
      *
      * @param $password string to fill password field.
      */

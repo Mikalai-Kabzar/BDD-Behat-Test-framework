@@ -1,20 +1,21 @@
 <?php
 
-use TestFramework\Pages\Ticketmaster\MainPage;
+
+use TestFramework\Pages\Application\MainPage;
 use TestFramework\Services\WebElementsService;
 use TestFramework\Services\AssertService;
 
 /**
- * Defines Ticketmaster navigation context.
+ * Defines Application navigation context.
  */
-class TicketmasterNavigationContext extends BaseFeatureContext {
+class NavigationContext extends BaseFeatureContext {
 
     protected static $base_URL = MainPage::BASE_URL;
 
     /**
-     * @Given I am on Ticketmaster
+     * @Given I am on Application
      */
-    public function iAmOnTicketmaster() {
+    public function iAmOnApplication() {
         $this->goToBaseUrl();
         WebElementsService::getWebElement(MainPage::MUSIC_TAB_XPATH);
         WebElementsService::getWebElement(MainPage::ARTS_TAB_XPATH);

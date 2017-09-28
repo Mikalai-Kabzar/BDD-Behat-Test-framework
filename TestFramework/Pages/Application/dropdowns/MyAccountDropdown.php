@@ -1,6 +1,6 @@
 <?php
 
-namespace TestFramework\Pages\Ticketmaster\Dropdowns;
+namespace TestFramework\Pages\Application\Dropdowns;
 
 /**
  * Defines My account dropdown.
