@@ -1,7 +1,7 @@
 <?php
 
 use Behat\Testwork\Tester\Result\TestResult;
-use BehatReportPortal\BehatReportPortalAnnotationsEnum;
+use BehatReportPortal\BehatReportPortalAnnotations;
 use BehatReportPortal\BehatReportPortalService;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -14,7 +14,7 @@ use WebDriver\Exception;
 /**
  * Defines basic application features from the specific context.
  */
-abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext, BehatReportPortalAnnotationsEnum
+abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext, BehatReportPortalAnnotations
 {
     protected static $base_URL = "base_URL";
 
