@@ -12,7 +12,7 @@ class SignInContext extends BaseFeatureContext {
     /**
      * @When I enter :password password to Application Password field on Sign In to My Account page
      */
-    public function iEnterPasswordToTicketmasterPasswordFieldOnSignInToMyAccountPage($password) {
+    public function iEnterPasswordToPasswordFieldOnSignInToMyAccountPage($password) {
         SignInToMyAccountPage::fillPassword($password);
     }
 
