@@ -1,34 +1,15 @@
 <?php
+
 namespace TestFramework\Services;
 
 use PHPUnit_Framework_AssertionFailedError;
+use BehatReportPortal\BehatReportPortalService;
 
 /**
  * Assert services for autotests
  */
 class AssertService
 {
-
-    private static $assertMessage = '';
-
-    private static $stackTrace = '';
-
-    /**
-     * Get assert message.
-     */
-    public static function getAssertMessage()
-    {
-        return AssertService::$assertMessage;
-    }
-
-    /**
-     * Get stack trace message.
-     */
-    public static function getStackTraceMessage()
-    {
-        return AssertService::$stackTrace;
-    }
-
     /**
      * Assert two values equality.
      *
@@ -39,7 +20,7 @@ class AssertService
      */
     public static function assertEquals($expected, $actual)
     {
-        AssertService::handleException('PHPUnit_Framework_Assert::assertEquals', $expected, $actual);
+        self::asserEquals($expected, $actual);
     }
 
     /**
@@ -52,18 +33,21 @@ class AssertService
      */
     public static function assertWebElementExists($expected, $xpath)
     {
-        AssertService::handleException('PHPUnit_Framework_Assert::assertEquals', $expected, WebElementsService::isElementExists($xpath));
+        self::asserEquals($expected, WebElementsService::isElementExists($xpath));
+    }
+
+    private static function asserEquals($func, ...$params)
+    {
+        self::handleException('PHPUnit_Framework_Assert::assertEquals', ...$params);
     }
 
     private static function handleException($func, ...$params)
     {
-        AssertService::$assertMessage = '';
-        AssertService::$stackTrace = '';
         try {
             $func(...$params);
         } catch (PHPUnit_Framework_AssertionFailedError $e) {
-            AssertService::$assertMessage = $e->getMessage();
-            AssertService::$stackTrace = $e->getTraceAsString();
+            BehatReportPortalService::setAssertMessage($e->getMessage());
+            BehatReportPortalService::setStackTraceMessage($e->getTraceAsString());
             throw new PHPUnit_Framework_AssertionFailedError();
         }
     }

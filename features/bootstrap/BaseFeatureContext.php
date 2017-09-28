@@ -1,6 +1,7 @@
 <?php
 
-use BehatReportPortal\BehatReportPortalAnnotations;
+use Behat\Testwork\Tester\Result\TestResult;
+use BehatReportPortal\BehatReportPortalAnnotationsEnum;
 use BehatReportPortal\BehatReportPortalService;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -14,17 +15,10 @@ use WebDriver\Exception;
 /**
  * Defines basic application features from the specific context.
  */
-abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext, BehatReportPortalAnnotations
+abstract class BaseFeatureContext extends RawMinkContext implements Context, SnippetAcceptingContext, BehatReportPortalAnnotationsEnum
 {
-
     protected static $base_URL = "base_URL";
 
-    private static $picFolder = "build" . DIRECTORY_SEPARATOR . "output" . DIRECTORY_SEPARATOR . "pic";
-
-    // function __construct() {
-    // BaseFeatureContext::$httpService = new ReportPortalHTTPService();
-    // }
-    
     /**
      * Go to base test URL.
      */
@@ -35,14 +29,15 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
 
     /**
      * Go to custom URL.
+     * @param string $path - path to url
      */
-    public function goToUrl($path)
+    public function goToUrl(string $path)
     {
         $this->getSession()
             ->getDriver()
             ->setTimeouts([
-            'page load' => 10000
-        ]);
+                'page load' => 10000
+            ]);
         try {
             $this->visitPath($path);
         } catch (Exception $e) {
@@ -54,79 +49,14 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
         $this->getSession()
             ->getDriver()
             ->setTimeouts([
-            'page load' => 25000
-        ]);
-        $this->setSessionToServices();
-    }
-
-    /**
-     * Set session instance to Service abstract class.
-     */
-    public function setSessionToServices()
-    {
+                'page load' => 25000
+            ]);
         Service::setSession($this->getSession());
     }
 
-    /**
-     * @BeforeSuite
-     *
-     * Clean up $picFolder folder before test suite execution.
-     */
-    public static function deletePictures()
-    {
-        $projectPath = dirname(__FILE__, 3);
-        $path = BaseFeatureContext::$picFolder;
-        if (file_exists($path)) {
-            BaseFeatureContext::delTree($path);
-        }
-        mkdir($path);
-    }
-
-    public static function delTree($dir)
-    {
-        $files = array_diff(scandir($dir), array(
-            '.',
-            '..'
-        ));
-        foreach ($files as $file) {
-            (is_dir("$dir/$file")) ? BaseFeatureContext::delTree("$dir/$file") : unlink("$dir/$file");
-        }
-        return rmdir($dir);
-    }
-
-     
-    /**
-     * 
-     * Take screenshoot and save to $picFolder.
-     */
-    public function takeScreenshotAfterFailedStep($event)
-    {
-        if ($event->getTestResult()->getResultCode() === \Behat\Testwork\Tester\Result\TestResult::FAILED) {
-            $regexp = '#[^a-zA-Z0-9 ,_\.=]#';
-            $driver = $this->getSession()->getDriver();
-            if ($driver instanceof \Behat\Mink\Driver\Selenium2Driver) {
-                $scenarioName = $event->getFeature()->getTitle();
-                $projectPath = dirname(__FILE__, 3);
-                $folderName = BaseFeatureContext::$picFolder . DIRECTORY_SEPARATOR . preg_replace($regexp, '', $scenarioName);
-                if (! file_exists($folderName)) {
-                    mkdir($folderName);
-                }
-                $stepText = $event->getStep()->getText();
-                $fileName = preg_replace($regexp, '', "Feature (" . $scenarioName . "), Step (" . $stepText . ")") . ".png";
-                $fullFilePath = $folderName . DIRECTORY_SEPARATOR . $fileName;
-                if (! file_exists($fullFilePath)) {
-                    file_put_contents($fullFilePath, $this->getSession()->getScreenshot());
-                    print "Screenshot for '{$stepText}' placed in " . $fullFilePath . "\n";
-                }
-            }
-        }
-    }
-
     public static function startLaunch(HookScope $event)
-    { 
-        
-        if (! ReportPortalHTTPService::isSuiteRunned()) {
-            print 'start launch';
+    {
+        if (!ReportPortalHTTPService::isSuiteRunned()) {
             ReportPortalHTTPService::configureReportPortalHTTPService('config.yaml');
             BehatReportPortalService::startLaunch($event);
         }
@@ -134,21 +64,21 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
 
     public static function startFeature(HookScope $event)
     {
-        if (! ReportPortalHTTPService::isFeatureRunned()) {
+        if (!ReportPortalHTTPService::isFeatureRunned()) {
             BehatReportPortalService::startFeature($event);
         }
     }
 
     public static function startScenario(HookScope $event)
     {
-        if (! ReportPortalHTTPService::isScenarioRunned()) {
+        if (!ReportPortalHTTPService::isScenarioRunned()) {
             BehatReportPortalService::startScenario($event);
         }
     }
 
     public static function startStep(HookScope $event)
     {
-        if (! ReportPortalHTTPService::isStepRunned()) {
+        if (!ReportPortalHTTPService::isStepRunned()) {
             BehatReportPortalService::startStep($event);
         }
     }
@@ -156,6 +86,12 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
     public static function finishStep(HookScope $event)
     {
         if (ReportPortalHTTPService::isStepRunned()) {
+            if ($event->getTestResult()->getResultCode() === TestResult::FAILED) {
+                $session = Service::getSession();
+                if ($session != null) {
+                    ReportPortalHTTPService::addLogMessageWithPicture($session->getDriver()->getScreenshot(), 'nothing', 'picture', 'ERROR', 'png');
+                }
+            }
             BehatReportPortalService::finishStep($event);
         }
     }
@@ -163,6 +99,7 @@ abstract class BaseFeatureContext extends RawMinkContext implements Context, Sni
     public static function finishScenario(HookScope $event)
     {
         if (ReportPortalHTTPService::isScenarioRunned()) {
+            Service::sessionToNull();
             BehatReportPortalService::finishScenario($event);
         }
     }

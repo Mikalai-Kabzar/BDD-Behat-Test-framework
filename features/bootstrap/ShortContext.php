@@ -6,7 +6,6 @@ use TestFramework\Services\AssertService;
  */
 class ShortContext extends BaseFeatureContext
 {
-
     /**
      * @Given I want to calculate some value
      */
