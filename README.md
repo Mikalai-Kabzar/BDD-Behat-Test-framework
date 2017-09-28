@@ -1,4 +1,4 @@
-BDD-Behat-Ticketmaster Test automation framework for ticketmaster.co.uk. Used Behat+Mink.
+BDD-Behat Test automation framework. Used Behat+Mink.
 ----------------
 
 Installing additional packages
