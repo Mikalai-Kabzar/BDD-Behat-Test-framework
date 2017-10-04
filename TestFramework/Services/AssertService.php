@@ -2,6 +2,7 @@
 
 namespace TestFramework\Services;
 
+use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_AssertionFailedError;
 use BehatReportPortal\BehatReportPortalService;
 
@@ -17,10 +18,12 @@ class AssertService
      *            - expected value.
      * @param - $actual
      *            - actual value.
+     * @param - $errorMessage
+     *            - Custom error message.
      */
-    public static function assertEquals($expected, $actual)
+    public static function assertEquals($expected, $actual, $errorMessage)
     {
-        self::asserEquals($expected, $actual,'ATATA ERROR !!!!!');
+        self::asserEquals($expected, $actual, $errorMessage);
     }
 
     /**
@@ -33,7 +36,7 @@ class AssertService
      */
     public static function assertWebElementExists($expected, $xpath)
     {
-        self::asserEquals($expected, WebElementsService::isElementExists($xpath));
+        self::asserEquals($expected, WebElementsService::isElementExists($xpath),'WebElement ('.$xpath.') does not exist.');
     }
 
     private static function asserEquals(...$params)

@@ -28,7 +28,7 @@ class SignInContext extends BaseFeatureContext {
      */
     public function iDontGetThereAreProblemsWithYourSubmissionPage() {
         $isErrorMessageDisplayed = ErrorMessagesPage::isDisplayed();
-        AssertService::assertEquals(false, $isErrorMessageDisplayed);
+        AssertService::assertEquals(false, $isErrorMessageDisplayed,'I get There are problems with your submission page');
     }
 
     /**
@@ -43,7 +43,7 @@ class SignInContext extends BaseFeatureContext {
      */
     public function iGetThereAreProblemsWithYourSubmissionPage() {
         $isErrorMessageDisplayed = ErrorMessagesPage::isDisplayed();
-        AssertService::assertEquals(true, $isErrorMessageDisplayed);
+        AssertService::assertEquals(true, $isErrorMessageDisplayed,'I dont get There are problems with your submission page');
     }
 
 }

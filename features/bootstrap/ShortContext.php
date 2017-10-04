@@ -27,6 +27,6 @@ class ShortContext extends BaseFeatureContext
      */
     public function iGet($value1)
     {
-        AssertService::assertEquals($value1, $this->result);
+        AssertService::assertEquals($value1, $this->result, 'I does not get value '.$value1);
     }
 }

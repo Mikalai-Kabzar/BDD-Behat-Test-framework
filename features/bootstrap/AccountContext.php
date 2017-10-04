@@ -62,7 +62,7 @@ class AccountContext extends BaseFeatureContext {
      */
     public function myAccountDropdownIsOpened() {
         $isDropDownOpened = MainPage::getMyAccountDropDown()->isOptionsVisible();
-        AssertService::assertEquals(true, $isDropDownOpened);
+        AssertService::assertEquals(true, $isDropDownOpened, 'My account dropdown is not opened');
     }
 
     /**
@@ -70,7 +70,7 @@ class AccountContext extends BaseFeatureContext {
      */
     public function myAccountDropdownIsNotOpened() {
         $isDropDownOpened = MainPage::getMyAccountDropDown()->isOptionsVisible();
-        AssertService::assertEquals(false, $isDropDownOpened);
+        AssertService::assertEquals(false, $isDropDownOpened, 'My account dropdown is opened');
     }
 
     /**
@@ -79,7 +79,7 @@ class AccountContext extends BaseFeatureContext {
     public function signInPageIsDisplayed() {
         $xpath = SignInPage::WELCOME_MESSAGE_XPATH;
         $isSignInPage = WebElementsService::isElementExists($xpath);
-        AssertService::assertEquals(true, $isSignInPage);
+        AssertService::assertEquals(true, $isSignInPage,'Sign in page is not displayed');
     }
 
     /**
@@ -88,7 +88,7 @@ class AccountContext extends BaseFeatureContext {
     public function signInPageContainsCorrectWelcomeMessage() {
         $xpath = SignInPage::WELCOME_MESSAGE_XPATH;
         $actualMessage = WebElementsService::getWebElementText($xpath);
-        AssertService::assertEquals(SignInPage::WELCOME_MESSAGE, $actualMessage);
+        AssertService::assertEquals(SignInPage::WELCOME_MESSAGE, $actualMessage, 'Sign in page contains wrong Welcome message');
     }
 
 }

@@ -2,7 +2,7 @@ default:
     suites:
         My_suite_features:
             paths:
-              - %paths.base%/features/Features
+              - %paths.base%/features/Features/navigation-failures.feature
               #- %paths.base%/features/Features/ShortTest1.feature
               #- %paths.base%/features/Features/ShortTest2.feature
               #- %paths.base%/features/Features/ShortTest3.feature

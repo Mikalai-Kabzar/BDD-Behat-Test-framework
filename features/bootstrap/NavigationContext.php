@@ -42,7 +42,7 @@ class NavigationContext extends BaseFeatureContext {
     public function theButtonIsClicked($pageLabel) {
         $xpath = MainPage::getHeaderXpathByLabel($pageLabel) . MainPage::TAB_SELECTED_ADDON_XPATH;
         $isElementExist = WebElementsService::isElementExists($xpath);
-        AssertService::assertEquals(true, $isElementExist);
+        AssertService::assertEquals(true, $isElementExist,'The ('.$pageLabel.') button does not clicked');
     }
 
     /**
@@ -51,7 +51,7 @@ class NavigationContext extends BaseFeatureContext {
     public function thePageIsLoaded($pageLabel) {
         $xpath = MainPage::getHeaderXpathByLabel($pageLabel) . MainPage::TAB_SELECTED_ADDON_XPATH;
         $isElementExist = WebElementsService::isElementExists($xpath);
-        AssertService::assertEquals(true, $isElementExist);
+        AssertService::assertEquals(true, $isElementExist,'The ('.$pageLabel.') tab does not loaded');
     }
 
 }
