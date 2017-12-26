@@ -15,7 +15,7 @@ $> bin/behat
 ```
 (Windows)
 ```bash
-$> bin/behat
+$> behat
 ```
 
 Note:
